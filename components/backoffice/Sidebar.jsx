@@ -106,13 +106,13 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
                   { openMenu ? <ChevronDown/> : <ChevronRight/>}
                 </button>
               </CollapsibleTrigger>
-              <CollapsibleContent className=" py-3 px-3 pl-6 bg-slate-800 rounded-lg">
+              <CollapsibleContent className="py-3 px-3 pl-6 dark:bg-slate-800 rounded-lg dark:text-slate-300">
 
                 {
                   catalogLinks.map((item,i) => {
                     const Icon = item.icon
                     return(
-                        <Link onClick={() =>setShowSidebar(false)} key={i} href={item.href} className={pathname===item.href?"flex items-center space-x-3 py-1 text-sm text-lime-600":"flex items-center space-x-3 py-1 text-slate-100"}>
+                        <Link onClick={() =>setShowSidebar(false)} key={i} href={item.href} className={pathname===item.href?"flex items-center space-x-3 py-1 text-sm text-lime-600":"flex items-center space-x-3 py-1"}>
                           <Icon className="w-4 h-4"/>
                           <span>{item.title}</span>
                         </Link>
