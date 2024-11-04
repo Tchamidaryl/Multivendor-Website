@@ -19,7 +19,7 @@ export default function NewBanner() {
       -image
       */
     }
-    
+
     const slug = generateSlug(data.title)
     data.slug = slug
     console.log(data);

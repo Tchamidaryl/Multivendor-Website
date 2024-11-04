@@ -45,7 +45,12 @@ export default function NewCategory() {
               register={register}
               errors={errors}
             />
-            <ImageInput imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint='imageUploader' label="Category Image"/>
+            <ImageInput
+              imageUrl={imageUrl}
+              setImageUrl={setImageUrl}
+              endpoint='categoryImageUploader'
+              label="Category Image"
+              />
           </div>
             <SubmitButton isLoading={false} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..."/>
         </form>

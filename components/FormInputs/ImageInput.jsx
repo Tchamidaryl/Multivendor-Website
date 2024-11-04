@@ -1,6 +1,6 @@
 import { UploadDropzone } from "@/lib/uploadthing";
 import { Pencil } from "lucide-react";
-Import Image from "next/image";
+import Image from "next/image";
 import React from "react";
 
 export default function ImageInput({
@@ -15,7 +15,7 @@ export default function ImageInput({
             <div className="flex justify-between items-center mb-4">
                 <label
                     htmlFor="course-image"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50 mb-2"
                 >
                     {label}
                 </label>
@@ -51,7 +51,7 @@ export default function ImageInput({
                     onUploadError={(error) => {
                         //Dn something the error
                         toast.error("Image Upload Failed, try again");
-                        console.log(`ERROR! ${error.message}`);
+                        console.log(`ERROR! ${error.message}`, error);
                     }}
                 />
             )}
