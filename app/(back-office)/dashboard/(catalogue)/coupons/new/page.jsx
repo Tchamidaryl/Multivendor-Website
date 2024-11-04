@@ -3,14 +3,15 @@ import FormHeader from '@/components/backoffice/FormHeader'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextInput from '@/components/FormInputs/TextInput'
 import { makePostRequest } from '@/lib/apiRequest'
+import { generateCouponCode } from '@/lib/generateCouponcode'
 import { generateSlug } from '@/lib/generateSlug'
 import React, { useState} from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function NewCoupon() {
   const [loading, setLoading] = useState(false)
-  const {register, reset, handleSubmit, formState:{errors}} = useForm();
-
+  const [couponCode, setCouponCode] = useState()
+  const {register, watch, reset, handleSubmit, formState:{errors}} = useForm();
   async function onSubmit(data){
     {
       /*
@@ -20,8 +21,8 @@ export default function NewCoupon() {
       -expiryDate
       */
     }
-    // const slug = generateSlug(data.title)
-    // data.slug = slug;
+    const couponCode = generateCouponCode(data.title, data.expiryDate);
+    data.couponCode = couponCode;
     console.log(data);
     // makePostRequest(setLoading, "api/categories", data, "Category", reset);
     // setImageUrl("")
@@ -36,12 +37,6 @@ export default function NewCoupon() {
             <TextInput
               label="Coupon Title"
               name="title"
-              register={register}
-              errors={errors}
-            />
-            <TextInput
-              label="Coupon Code"
-              name="couponCode"
               register={register}
               errors={errors}
               className='w-full'
