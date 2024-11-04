@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 
 export default function NewCategory() {
   const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false)
   const {register, handleSubmit, formState:{errors}} = useForm();
 
   async function onSubmit(data){
@@ -53,7 +54,9 @@ export default function NewCategory() {
               label="Category Image"
               />
           </div>
-            <SubmitButton isLoading={false} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..."/>
+            <SubmitButton
+              isLoading={loading}
+              buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..."/>
         </form>
     </div>
   )
