@@ -4,7 +4,6 @@ import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextInput from '@/components/FormInputs/TextInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateCouponCode } from '@/lib/generateCouponcode'
-import { generateSlug } from '@/lib/generateSlug'
 import React, { useState} from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -24,8 +23,7 @@ export default function NewCoupon() {
     const couponCode = generateCouponCode(data.title, data.expiryDate);
     data.couponCode = couponCode;
     console.log(data);
-    // makePostRequest(setLoading, "api/categories", data, "Category", reset);
-    // setImageUrl("")
+    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset);
   }
 
   return (
