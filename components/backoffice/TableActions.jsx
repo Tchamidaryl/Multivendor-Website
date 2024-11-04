@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function TableActions() {
     return (
-        <div className="flex py-6 px-12 justify-between bg-slate-700 rounded-lg items-center gap-8">
-            <button className="relative inline-flex items-center justify-center py-3 px-4 space-x-3 text-base font-medium text-slate-400 rounded-lg group bg-slate-800 hover:text-white border border-lime-500 dark:text-white dark:hover:text-slate-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+        <div className="flex py-6 px-12 justify-between bg-white shadow dark:bg-slate-700 rounded-lg items-center gap-8">
+            <button className="relative inline-flex items-center justify-center py-3 px-4 space-x-3 text-base font-medium text-gray-900 rounded-lg group bg-slate-100 dark:bg-slate-800 border border-slate-900 dark:border-lime-500 dark:text-white dark:hover:text-slate-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
             <Download/>
             <span>Export</span>
             </button>

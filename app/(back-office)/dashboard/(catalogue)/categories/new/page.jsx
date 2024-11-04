@@ -23,7 +23,8 @@ export default function NewCategory() {
       */
     }
     const slug = generateSlug(data.title)
-    data.slug = slug
+    data.slug = slug;
+    data.imageUrl = imageUrl;
     console.log(data);
   }
 
