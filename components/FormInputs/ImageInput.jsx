@@ -2,6 +2,7 @@ import { UploadDropzone } from "@/lib/uploadthing";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import toast from "react-hot-toast";
 
 export default function ImageInput({
     label,
@@ -44,7 +45,7 @@ export default function ImageInput({
                     onClientUploadComplete={(res) => {
                         setImageUrl(res[0].url);
                         //Do something with the response
-                        toast.succcess("Image Upload Complete");
+                        toast.success("Image Upload Complete");
                         console.log("Files: ", res);
                         console.log("Upload Completed");
                     }}
