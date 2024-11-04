@@ -3,7 +3,7 @@ import React, { useState} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../public/logo-dark.jpg'
-import { Boxes, Building2, ChevronDown, ChevronRight, ExternalLink, LayoutGrid, LayoutList, LogOut, MonitorPlay, ScanSearch, SendToBack, Slack, Truck, User, Users2, UserSquare2, Wallet, Warehouse } from 'lucide-react'
+import { Boxes, Building2, ChevronDown, ChevronRight, ExternalLink, LayoutGrid, LayoutList, LogOut, MonitorPlay, ScanSearch, Slack, Truck, User, Users2, UserSquare2, Wallet, Warehouse } from 'lucide-react'
 import {
   Collapsible,
   CollapsibleContent,

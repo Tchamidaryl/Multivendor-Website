@@ -1,7 +1,7 @@
 "use client"
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
 import { extractRouterConfig } from "uploadthing/server"
-import { ourFileRouter } from '@/app/api/uploadThing/core'
+import { ourFileRouter } from '../app/api/uploadThing/core'
 import { ThemeProvider } from 'next-themes'
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
