@@ -1,14 +1,18 @@
 'use client'
 import FormHeader from '@/components/backoffice/FormHeader'
+import ImageInput from '@/components/FormInputs/ImageInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
+import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function NewBanner() {
-  const {register, handleSubmit, formState:{errors}} = useForm();
+  const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const {register, reset, handleSubmit, formState:{errors}} = useForm();
 
   async function onSubmit(data){
     {
@@ -20,9 +24,10 @@ export default function NewBanner() {
       */
     }
 
-    const slug = generateSlug(data.title)
-    data.slug = slug
+    data.imageUrl = imageUrl;
     console.log(data);
+    makePostRequest(setLoading, "api/banners", data, "Banner", reset);
+    setImageUrl("");
   }
 
   return (
@@ -36,16 +41,22 @@ export default function NewBanner() {
               name="title"
               register={register}
               errors={errors}
-              className='w-full'
             />
-            <TextAreaInput
-              label="Category Description"
-              name="description"
+            <TextInput
+              label="Banner Link"
+              name="link"
               register={register}
               errors={errors}
             />
+            {/* Configure this endpoint in the core.js */}
+            <ImageInput
+              imageUrl={imageUrl}
+              setImageUrl={setImageUrl}
+              endpoint='bannerImageUploader'
+              label="Banner Image"
+            />
           </div>
-            <SubmitButton isLoading={false} buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait..."/>
+            <SubmitButton isLoading={false} buttonTitle="Create Banner" loadingButtonTitle="Creating Banner please wait..."/>
         </form>
     </div>
   )
