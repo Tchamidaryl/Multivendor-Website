@@ -2,7 +2,6 @@
 import FormHeader from '@/components/backoffice/FormHeader'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
-import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
