@@ -3,6 +3,7 @@ import FormHeader from '@/components/backoffice/FormHeader'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import SelectInput from '@/components/FormInputs/SelectInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
+import ArrayItemInput from '@/components/FormInputs/ArrayItemInput'
 import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
 import { makePostRequest } from '@/lib/apiRequest'
@@ -40,6 +41,8 @@ export default function NewCategory() {
       title: "Farmer 3"
     },
   ];
+  // TAGS
+  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false)
   const {register, reset, handleSubmit, formState:{errors}} = useForm();
 
@@ -63,6 +66,7 @@ export default function NewCategory() {
     const slug = generateSlug(data.title)
     data.slug = slug;
     data.imageUrl = imageUrl;
+    data.tags = tags;
     console.log(data);
     makePostRequest(setLoading, "api/products", data, "Product", reset);
     setImageUrl("")
@@ -126,14 +130,16 @@ export default function NewCategory() {
               options={farmers}
               className='w-full'
             />
-            {/* TAGS */}
-
             <ImageInput
               imageUrl={imageUrl}
               setImageUrl={setImageUrl}
               endpoint='productImageUploader'
               label="Product Image"
             />
+
+            {/* TAGS */}
+            <ArrayItemInput setItems={setTags} items={tags} itemTitle="Tag"/>
+
             <TextAreaInput
               label="Product Description"
               name="description"

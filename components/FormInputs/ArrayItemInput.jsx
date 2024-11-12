@@ -2,12 +2,13 @@
 import React, { useState } from 'react'
 import { Plus, X } from 'lucide-react'
 
-export default function TagsInput({setItems, items = []}) {
+export default function ArrayItemInput({setItems, items = [], itemTitle}) {
 
     const [item, setItem] = useState("")
     const [showTagForm, setShowTagForm] = useState(false);
 
     function addItem(){
+        if(!item)return;
         setItems([...items, item]);
         setItem("")
     }
@@ -37,7 +38,7 @@ export default function TagsInput({setItems, items = []}) {
                         value={item}
                         onChange={(e) => setItem(e.target.value)} type="text"
                         id="voice-search"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500" placeholder="Create Tags..."
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500" placeholder={`Create a ${itemTitle}`}
                         />
                     </div>
                     <button
@@ -61,7 +62,7 @@ export default function TagsInput({setItems, items = []}) {
                     className="flex items-center space-x-2 text-slate-800 dark:text-slate-300 py-2 px-4"
                     >
                     <Plus/>
-                    <span>Add Item</span>
+                    <span>Add {itemTitle}</span>
                     </button>
                 )
             }
