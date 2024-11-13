@@ -10,6 +10,7 @@ import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
 import React, { useState} from 'react'
 import { useForm } from 'react-hook-form'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
 
 export default function NewCategory() {
   const [imageUrl, setImageUrl] = useState("");
@@ -44,7 +45,13 @@ export default function NewCategory() {
   // TAGS
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false)
-  const {register, reset, handleSubmit, formState:{errors}} = useForm();
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({
+    defaultValues:{
+      isActive: true,
+    }
+  });
+  const isActive = watch("isActive");
+  console.log(isActive);
 
   async function onSubmit(data){
     {
@@ -146,6 +153,15 @@ export default function NewCategory() {
               register={register}
               errors={errors}
             />
+
+            <ToggleInput
+              label="Publish your Product"
+              name="isActive"
+              trueTitle="Active"
+              falseTitle="Inactive"
+              register={register}
+            />
+
           </div>
             <SubmitButton
               isLoading={loading}

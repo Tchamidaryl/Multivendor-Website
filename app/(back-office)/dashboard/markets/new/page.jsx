@@ -4,6 +4,7 @@ import ImageInput from '@/components/FormInputs/ImageInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
 import React, { useState } from 'react'
@@ -12,7 +13,12 @@ import { useForm } from 'react-hook-form'
 export default function NewBanner() {
   const [logoUrl, setLogoUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const {register, reset, handleSubmit, formState:{errors}} = useForm();
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({
+    defaultValues:{
+      isActive:true
+    }
+  });
+  const isActive = watch("isActive")
 
   async function onSubmit(data){
     {
@@ -56,6 +62,13 @@ export default function NewBanner() {
               name="description"
               register={register}
               errors={errors}
+            />
+            <ToggleInput
+              label="Market Status"
+              name="isActive"
+              trueTitle="Active"
+              falseTitle="Inactive"
+              register={register}
             />
           </div>
             <SubmitButton isLoading={false} buttonTitle="Create Market" loadingButtonTitle="Creating Market please wait..."/>

@@ -5,6 +5,7 @@ import SelectInput from '@/components/FormInputs/SelectInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
 import React, { useState} from 'react'
@@ -31,7 +32,12 @@ export default function NewCategory() {
     },
   ]
   const [loading, setLoading] = useState(false)
-  const {register, reset, handleSubmit, formState:{errors}} = useForm();
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({
+    defaultValues:{
+      isActive:true
+    }
+  });
+  const isActive = watch("isActive")
 
   async function onSubmit(data){
     {
@@ -84,7 +90,14 @@ export default function NewCategory() {
               setImageUrl={setImageUrl}
               endpoint='categoryImageUploader'
               label="Category Image"
-              />
+            />
+            <ToggleInput
+              label="Publish your Category"
+              name="isActive"
+              trueTitle="Active"
+              falseTitle="Inactive"
+              register={register}
+            />
           </div>
             <SubmitButton
               isLoading={loading}

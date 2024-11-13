@@ -2,6 +2,7 @@
 import FormHeader from '@/components/backoffice/FormHeader'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextInput from '@/components/FormInputs/TextInput'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateCouponCode } from '@/lib/generateCouponcode'
 import React, { useState} from 'react'
@@ -10,7 +11,12 @@ import { useForm } from 'react-hook-form'
 export default function NewCoupon() {
   const [loading, setLoading] = useState(false)
   const [couponCode, setCouponCode] = useState()
-  const {register, watch, reset, handleSubmit, formState:{errors}} = useForm();
+  const {register, watch, reset, handleSubmit, formState:{errors}} = useForm({
+    defaultValues:{
+      isActive:true
+    }
+  });
+  const isActive = watch("isActive")
   async function onSubmit(data){
     {
       /*
@@ -46,6 +52,13 @@ export default function NewCoupon() {
               register={register}
               errors={errors}
               className='w-full'
+            />
+            <ToggleInput
+              label="Publish your Coupon"
+              name="isActive"
+              trueTitle="Active"
+              falseTitle="Inactive"
+              register={register}
             />
           </div>
             <SubmitButton

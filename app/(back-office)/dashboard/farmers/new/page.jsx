@@ -3,6 +3,7 @@ import FormHeader from '@/components/backoffice/FormHeader'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateUserCode } from '@/lib/generateUserCode'
 import React, { useState} from 'react'
@@ -11,7 +12,12 @@ import { useForm } from 'react-hook-form'
 export default function NewFarmer() {
   const [loading, setLoading] = useState(false)
   const [couponCode, setCouponCode] = useState()
-  const {register, watch, reset, handleSubmit, formState:{errors}} = useForm();
+  const {register, watch, reset, handleSubmit, formState:{errors}} = useForm({
+    defaultValues:{
+      isActive:true
+    }
+  });
+  const isActive = watch("isActive")
   async function onSubmit(data){
     const farmerUniqueCode = generateUserCode("LFF", data.name);
     data.farmerUniqueCode = farmerUniqueCode;
@@ -81,6 +87,13 @@ export default function NewFarmer() {
               register={register}
               errors={errors}
               isRequired = {false}
+            />
+            <ToggleInput
+              label="Farmer Status"
+              name="isActive"
+              trueTitle="Active"
+              falseTitle="Inactive"
+              register={register}
             />
           </div>
             <SubmitButton
