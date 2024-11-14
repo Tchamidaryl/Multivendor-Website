@@ -19,10 +19,21 @@ export default function NewStaff() {
   });
   const isActive = watch("isActive")
   async function onSubmit(data){
-    const farmerUniqueCode = generateUserCode("LFF", data.name);
-    data.farmerUniqueCode = farmerUniqueCode;
+    /*
+    -name
+    -password
+    -email
+    -phone
+    -physicalAddress
+    -NIN
+    -DOB
+    -notes
+    -isActive
+    */
+    const code = generateUserCode("LSM", data.name);
+    data.code = code;
     console.log(data);
-    makePostRequest(setLoading, "api/staff", data, " Staff", reset);
+    makePostRequest(setLoading, "api/staffs", data, " Staff", reset);
   }
 
   return (
@@ -36,6 +47,21 @@ export default function NewStaff() {
               name="name"
               register={register}
               errors={errors}
+            />
+            <TextInput
+              label="NIN(Id Number)"
+              name="nin"
+              register={register}
+              errors={errors}
+              className='w-full'
+            />
+            <TextInput
+              label="Date of Birth"
+              name="dob"
+              type='date'
+              register={register}
+              errors={errors}
+              className='w-full'
             />
             <TextInput
               label="Password"
@@ -73,6 +99,13 @@ export default function NewStaff() {
               register={register}
               errors={errors}
               isRequired = {false}
+            />
+            <ToggleInput
+            label="Staff Member Status"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Inactive"
+            register={register}
             />
           </div>
             <SubmitButton
