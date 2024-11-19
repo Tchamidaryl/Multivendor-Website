@@ -1,9 +1,22 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request){
     try{
         const { farmerUniqueCode, contactPerson, contactPersonPhone, email, name, notes, phone, physicalAddress, terms} = await request.json();
-        const newFarmer = {farmerUniqueCode, contactPerson, contactPersonPhone, email, name, notes, phone, physicalAddress, terms};
+        const newFarmer = await db.farmer.create({
+            data:{
+                farmerUniqueCode,
+                contactPerson,
+                contactPersonPhone,
+                email,
+                name,
+                notes,
+                phone,
+                physicalAddress,
+                terms,
+            }
+        })
         console.log(newFarmer);
         return NextResponse.json(newFarmer)
     }catch(error){

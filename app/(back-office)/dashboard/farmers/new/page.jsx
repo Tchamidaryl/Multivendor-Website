@@ -6,6 +6,7 @@ import TextInput from '@/components/FormInputs/TextInput'
 import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateUserCode } from '@/lib/generateUserCode'
+import { useRouter } from 'next/navigation'
 import React, { useState} from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -18,11 +19,15 @@ export default function NewFarmer() {
     }
   });
   const isActive = watch("isActive")
+  const router = useRouter();
+  function redirect(){
+    router.push("/dashboard/banners");
+  }
   async function onSubmit(data){
     const farmerUniqueCode = generateUserCode("LFF", data.name);
     data.farmerUniqueCode = farmerUniqueCode;
     console.log(data);
-    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
+    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset, redirect);
   }
 
   return (

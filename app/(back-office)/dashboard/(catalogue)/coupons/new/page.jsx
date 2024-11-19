@@ -5,6 +5,8 @@ import TextInput from '@/components/FormInputs/TextInput'
 import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateCouponCode } from '@/lib/generateCouponCode'
+import { generateIsoFormattedDate } from '@/lib/generateIsoFormatedDate'
+import { useRouter } from 'next/navigation'
 import React, { useState} from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -17,6 +19,11 @@ export default function NewCoupon() {
     }
   });
   const isActive = watch("isActive")
+  const router = useRouter();
+  function redirect(){
+    router.push("/dashboard/coupons");
+  }
+
   async function onSubmit(data){
     {
       /*
@@ -27,9 +34,11 @@ export default function NewCoupon() {
       */
     }
     const couponCode = generateCouponCode(data.title, data.expiryDate);
+    const isoFormattedDate = generateIsoFormattedDate(data.expiryDate)
+    data.expiryDate = isoFormattedDate;
     data.couponCode = couponCode;
     console.log(data);
-    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset);
+    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset, redirect);
   }
 
   return (

@@ -6,6 +6,7 @@ import TextInput from '@/components/FormInputs/TextInput'
 import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -18,6 +19,10 @@ export default function NewBanner() {
     }
   });
   const isActive = watch("isActive");
+  const router = useRouter();
+  function redirect(){
+    router.push("/dashboard/banners");
+  }
 
   async function onSubmit(data){
     {
@@ -26,12 +31,13 @@ export default function NewBanner() {
       -title
       -link
       -image
+      -isActive
       */
     }
 
     data.imageUrl = imageUrl;
     console.log(data);
-    makePostRequest(setLoading, "api/banners", data, "Banner", reset);
+    makePostRequest(setLoading, "api/banners", data, "Banner", reset, redirect);
     setImageUrl("");
   }
 

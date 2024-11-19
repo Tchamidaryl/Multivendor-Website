@@ -6,7 +6,9 @@ export async function POST(request){
         const { title, couponCode, expiryDate } = await request.json();
         const newCoupon = await db.coupon.create({
             data:{
-                title, couponCode, expiryDate,
+                title,
+                couponCode,
+                expiryDate,
             },
         });
         console.log(newCoupon);
