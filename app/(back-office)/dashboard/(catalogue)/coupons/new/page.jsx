@@ -29,6 +29,7 @@ export default function NewCoupon() {
       /*
       -id => auto()
       -title
+      -isActive
       -code => auto()
       -expiryDate
       */

@@ -1,6 +1,7 @@
 'use client'
 import FormHeader from '@/components/backoffice/FormHeader'
 import ImageInput from '@/components/FormInputs/ImageInput'
+import SelectInput from '@/components/FormInputs/SelectInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
@@ -13,6 +14,20 @@ import { useForm } from 'react-hook-form'
 export default function NewBanner() {
   const [logoUrl, setLogoUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const categories = [
+    {
+      id: 1,
+      title: "Category 1"
+    },
+    {
+      id: 2,
+      title: "Category 2"
+    },
+    {
+      id: 3,
+      title: "Category 3"
+    },
+  ]
   const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({
     defaultValues:{
       isActive:true
@@ -49,6 +64,16 @@ export default function NewBanner() {
               name="title"
               register={register}
               errors={errors}
+              className='w-full'
+            />
+            <SelectInput
+              label="Select Categories"
+              name="categoryIds"
+              register={register}
+              errors={errors}
+              className='w-full'
+              options={categories}
+              multiple={true}
             />
             {/* Configure this endpoint in the core.js */}
             <ImageInput
