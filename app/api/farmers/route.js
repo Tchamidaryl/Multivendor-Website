@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(request){
     try{
-        const { farmerUniqueCode, contactPerson, contactPersonPhone, email, name, notes, phone, physicalAddress, terms} = await request.json();
-        const newFarmer = await db.farmer.create({
+        const { farmerUniqueCode, contactPerson, contactPersonPhone, email, name, notes, phone, physicalAddress, terms, isActive, farmerProfileImageUrl} = await request.json();
+        const newFarmer = await db.farmerProfile.create({
             data:{
                 farmerUniqueCode,
                 contactPerson,
@@ -15,6 +15,8 @@ export async function POST(request){
                 phone,
                 physicalAddress,
                 terms,
+                isActive,
+                farmerProfileImageUrl
             }
         })
         console.log(newFarmer);

@@ -43,6 +43,7 @@ model Category {
   isActive    Boolean
 
   products    Product[]
+  trainings   Training[]
   marketIds   String[]  @db.ObjectId
   markets     Market[]  @relation(fields: [marketIds], references: [id])
 
@@ -56,6 +57,7 @@ model Market {
   slug        String     @unique
   logoUrl     String?
   description String?
+  isActive    Boolean
 
   categoryIds String[]   @db.ObjectId
   categories  Category[] @relation(fields: [categoryIds], references: [id])
@@ -66,11 +68,81 @@ model Market {
 
 model Product {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  title       String    @unique
+  title       String
+  slug        String    @unique
+  imageUrl    String?
+  description String?
+  isActive    Boolean
+  sku         String?
+  barcode     String?
+  productPrice  Float
+  salePrice     Float
+  tags          String[]
 
-  category    Category   @relation(fields: [categoryId], references: [id])
-  categoryId  String     @db.ObjectId
+  category      Category   @relation(fields: [categoryId], references: [id])
+  categoryId    String     @db.ObjectId
+  user          User  @relation(fields: [userId], references: [id])
+  userId        String  @db.ObjectId
 
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime?  @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime?  @updatedAt
+}
+
+model FarmerProfile{
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  farmerUniqueCode     String
+  contactPerson        String?
+  contactPersonPhone   String?
+  farmerProfileImageUrl      String?
+  email                String
+  name                 String
+  notes                String?
+  phone                String
+  physicalAddress      String?
+  terms                String?
+  isActive             Boolean
+
+
+  user                 User  @relation(fields: [userId], references: [id])
+  userId               String  @db.ObjectId @unique
+
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime?  @updatedAt
+}
+
+model Training{
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  slug         String   @unique
+  imageUrl     String?
+  description  String?
+  content      String?
+  isActive     Boolean
+
+  category     Category   @relation(fields: [categoryId], references: [id])
+  categoryId   String     @db.ObjectId
+}
+
+
+enum UserRole{
+  ADMIN
+  USER
+  FARMER
+  MODERATOR
+}
+
+//USER => ADMIN, FARMER, CUSTOMER, AGENT
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  products      Product[]
+
+  role          UserRole  @default(USER)
+
+  farmerProfile FarmerProfile?
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }

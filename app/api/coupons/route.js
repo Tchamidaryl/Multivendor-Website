@@ -23,3 +23,25 @@ export async function POST(request){
     )
     }
 }
+
+export async function GET(request) {
+    try {
+        const coupons = await db.coupon.findMany({
+            orderBy: {
+                createdAt: "desc",
+            }
+        });
+        return NextResponse.json(coupons);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json(
+            {
+                message: "Failed to get Coupon",
+                error,
+            },
+            {
+                status: 500
+            }
+        );
+    }
+}

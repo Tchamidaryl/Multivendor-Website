@@ -1,5 +1,6 @@
 'use client'
 import FormHeader from '@/components/backoffice/FormHeader'
+import ImageInput from '@/components/FormInputs/ImageInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextAreaInput from '@/components/FormInputs/TextAreaInput'
 import TextInput from '@/components/FormInputs/TextInput'
@@ -12,6 +13,7 @@ import { useForm } from 'react-hook-form'
 
 export default function NewFarmer() {
   const [loading, setLoading] = useState(false)
+  const [farmerProfileImageUrl, setFarmerProfileImageUrl] = useState("");
   const [couponCode, setCouponCode] = useState()
   const {register, watch, reset, handleSubmit, formState:{errors}} = useForm({
     defaultValues:{
@@ -26,6 +28,7 @@ export default function NewFarmer() {
   async function onSubmit(data){
     const farmerUniqueCode = generateUserCode("LFF", data.name);
     data.farmerUniqueCode = farmerUniqueCode;
+    data.farmerProfileImageUrl = farmerProfileImageUrl;
     console.log(data);
     makePostRequest(setLoading, "api/farmers", data, "Farmer", reset, redirect);
   }
@@ -80,11 +83,18 @@ export default function NewFarmer() {
               errors={errors}
               className='w-full'
             />
+            <ImageInput
+              imageUrl={farmerProfileImageUrl}
+              setImageUrl={setFarmerProfileImageUrl}
+              endpoint='farmerProfileUploader'
+              label="Farmer Profile Image"
+            />
             <TextAreaInput
               label="Farmer's Payment Terms"
               name="terms"
               register={register}
               errors={errors}
+              isRequired = {false}
             />
             <TextAreaInput
               label="Notes"
@@ -103,7 +113,8 @@ export default function NewFarmer() {
           </div>
             <SubmitButton
               isLoading={loading}
-              buttonTitle="Create Farmer" loadingButtonTitle="Creating Farmer please wait..."/>
+              buttonTitle="Create Farmer" loadingButtonTitle="Creating Farmer please wait..."
+            />
         </form>
     </div>
   )

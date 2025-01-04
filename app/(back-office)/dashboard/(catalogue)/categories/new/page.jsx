@@ -8,6 +8,7 @@ import TextInput from '@/components/FormInputs/TextInput'
 import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
+import { useRouter } from 'next/navigation'
 import React, { useState} from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -21,6 +22,10 @@ export default function NewCategory() {
     }
   });
   const isActive = watch("isActive")
+  const router = useRouter();
+  function redirect(){
+    router.push("/dashboard/categories");
+  }
 
   async function onSubmit(data){
     {
@@ -37,7 +42,7 @@ export default function NewCategory() {
     data.slug = slug;
     data.imageUrl = imageUrl;
     console.log(data);
-    makePostRequest(setLoading, "api/categories", data, "Category", reset);
+    makePostRequest(setLoading, "api/categories", data, "Category", reset, redirect);
     setImageUrl("")
   }
 
