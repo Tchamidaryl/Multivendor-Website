@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import SubmitButton from "../FormInputs/SubmitButton";
 import TextInput from "../FormInputs/TextInput";
 
-export default function RegisterForm() {
+export default function RegisterForm({role}) {
     const router = useRouter(); // Redirecting on the client side
     const {
         register,
@@ -59,13 +59,13 @@ export default function RegisterForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="">
             <TextInput
-                label="Role"
+                label=""
                 name="role"
                 register={register}
                 errors = {errors}
-                type="text"
+                type="hidden"
                 className="sm:col-span-2 mb-3"
-                defaultValue="USER"
+                defaultValue={role}
             />
             <TextInput
                 label="Your Full Name"

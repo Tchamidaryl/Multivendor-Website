@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     try {
         // Extract the credentials
-        const { name, email, password } = await request.json();
+        const { name, email, password, role } = await request.json();
 
         //Check if the user already exists in the database
         const existingUser = await db.user.findUnique({
@@ -28,6 +28,7 @@ export async function POST(request) {
                 name,
                 email,
                 password: hashedPassword,
+                role
             },
         });
         console.log(newUser);
