@@ -10,27 +10,32 @@ import { generateUserCode } from '@/lib/generateUserCode'
 import { useRouter } from 'next/navigation'
 import React, { useState} from 'react'
 import { useForm } from 'react-hook-form'
+import ArrayItemInput from '../FormInputs/ArrayItemInput'
 
-export default function NewFarmerForm() {
+export default function NewFarmerForm({ user }) {
     const [loading, setLoading] = useState(false)
     const [farmerProfileImageUrl, setFarmerProfileImageUrl] = useState("");
     const [couponCode, setCouponCode] = useState()
+    const [products, setProducts] = useState([]);
     const {register, watch, reset, handleSubmit, formState:{errors}} = useForm({
         defaultValues:{
-        isActive:true
+            isActive: true,
+            ...user,
         }
     });
     const isActive = watch("isActive")
     const router = useRouter();
     function redirect(){
-        router.push("/dashboard/banners");
+        router.push("/dashboard/farmers");
     }
     async function onSubmit(data){
         const farmerUniqueCode = generateUserCode("LFF", data.name);
         data.farmerUniqueCode = farmerUniqueCode;
+        data.userId = user.id
+        data.products = products
         data.farmerProfileImageUrl = farmerProfileImageUrl;
         console.log(data);
-        makePostRequest(setLoading, "api/farmers", data, "Farmer", reset, redirect);
+        makePostRequest(setLoading, "api/farmers", data, "Farmer Profile", reset, redirect);
     }
 
     return (
@@ -79,6 +84,27 @@ export default function NewFarmerForm() {
                     register={register}
                     errors={errors}
                     className='w-full'
+                />
+                <TextInput
+                    label="What is the Size of Your Land in Accres"
+                    name="landSize"
+                    type='number'
+                    register={register}
+                    errors={errors}
+                    className='w-full'
+                />
+                <TextInput
+                    label="What is Your Main Crop that You Cultivate"
+                    name="mainCrop"
+                    type='text'
+                    register={register}
+                    errors={errors}
+                    className='w-full'
+                />
+                <ArrayItemInput
+                    setItems={setProducts}
+                    items={products}
+                    itemTitle="Product"
                 />
                 <ImageInput
                     imageUrl={farmerProfileImageUrl}

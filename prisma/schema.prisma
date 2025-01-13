@@ -101,6 +101,9 @@ model FarmerProfile{
   physicalAddress      String?
   terms                String?
   isActive             Boolean
+  products             String[]
+  landSize             Float
+  mainCrop             String
 
 
   user                 User  @relation(fields: [userId], references: [id])
