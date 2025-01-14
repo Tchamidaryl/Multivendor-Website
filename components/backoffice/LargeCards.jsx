@@ -18,21 +18,21 @@ export default function LargeCards() {
             sales: 300000,
             color: 'bg-orange-600',
         },{
-            period: 'Last Month',
+            period: 'All-time Sales',
             sales: 500000,
             color: 'bg-purple-600',
         }
     ]
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 py-8">
-       {
-        orderStats.map((item,i) => {
-            return(
-                <LargeCard className="bg-green-600" data={item} key={i} />
-            )
-        })
-       }
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 py-8">
+        {
+            orderStats.map((item,i) => {
+                return(
+                    <LargeCard className="bg-green-600" data={item} key={i} />
+                )
+            })
+        }
 
-    </div>
-  )
+        </div>
+    )
 }
