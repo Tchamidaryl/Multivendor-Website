@@ -1,10 +1,15 @@
 const { fontFamily } = require("tailwindcss/defaultTheme")
+import flowbite from "flowbite-react/tailwind"
 
 /** @type {import('tailwindcss').Config} */
 import { withUt } from "uploadthing/tw";
 export default withUt({
 	darkMode: ["class"],
-	content: ["app/**/*.{js,jsx,ts,tsx}", "components/**/*.{js,jsx,ts,tsx}"],
+	content: [
+		"app/**/*.{js,jsx,ts,tsx}",
+		"components/**/*.{js,jsx,ts,tsx}",
+		flowbite.content(),
+	],
 	theme: {
 	container: {
 		center: 'true',
@@ -85,5 +90,9 @@ export default withUt({
 		}
 	}
 },
-	plugins: [require("tailwindcss-animate"),require("@tailwindcss/forms")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("@tailwindcss/forms"),
+		flowbite.plugin(),
+	],
 });
