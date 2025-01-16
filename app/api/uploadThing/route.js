@@ -4,5 +4,5 @@ import { ourFileRouter } from "./core";
 
 //Export routes for the Next App Router
 export const { GET, POST } = createRouteHandler({
-    router: ourFileRouter,
+  router: ourFileRouter,
 });

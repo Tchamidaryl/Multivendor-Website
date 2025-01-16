@@ -1,43 +1,49 @@
-'use client'
-import FormHeader from '@/components/backoffice/FormHeader'
-import ImageInput from '@/components/FormInputs/ImageInput'
-import SelectInput from '@/components/FormInputs/SelectInput'
-import SubmitButton from '@/components/FormInputs/SubmitButton'
-import ArrayItemInput from '@/components/FormInputs/ArrayItemInput'
-import TextAreaInput from '@/components/FormInputs/TextAreaInput'
-import TextInput from '@/components/FormInputs/TextInput'
-import { makePostRequest } from '@/lib/apiRequest'
-import { generateSlug } from '@/lib/generateSlug'
-import React, { useState} from 'react'
-import { useForm } from 'react-hook-form'
-import ToggleInput from '@/components/FormInputs/ToggleInput'
-import { generateUserCode } from '@/lib/generateUserCode'
-import { useRouter } from 'next/navigation'
+"use client";
+import FormHeader from "@/components/backoffice/FormHeader";
+import ImageInput from "@/components/FormInputs/ImageInput";
+import SelectInput from "@/components/FormInputs/SelectInput";
+import SubmitButton from "@/components/FormInputs/SubmitButton";
+import ArrayItemInput from "@/components/FormInputs/ArrayItemInput";
+import TextAreaInput from "@/components/FormInputs/TextAreaInput";
+import TextInput from "@/components/FormInputs/TextInput";
+import { makePostRequest } from "@/lib/apiRequest";
+import { generateSlug } from "@/lib/generateSlug";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import ToggleInput from "@/components/FormInputs/ToggleInput";
+import { generateUserCode } from "@/lib/generateUserCode";
+import { useRouter } from "next/navigation";
 
-export default function NewProductForm({categories, farmers}) {
-    const [imageUrl, setImageUrl] = useState("");
+export default function NewProductForm({ categories, farmers }) {
+  const [imageUrl, setImageUrl] = useState("");
   // TAGS
-    const [tags, setTags] = useState([]);
-    const [loading, setLoading] = useState(false)
-    const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({
-        defaultValues:{
-        isActive: true,
-        isWholeSale: false,
-        }
-    });
-    const isActive = watch("isActive");
-    console.log(isActive);
+  const [tags, setTags] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    reset,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      isActive: true,
+      isWholeSale: false,
+    },
+  });
+  const isActive = watch("isActive");
+  console.log(isActive);
 
-    const isWholeSale = watch("isWholeSale");
+  const isWholeSale = watch("isWholeSale");
 
-    const router = useRouter();
-    function redirect() {
-        router.push("/dashboard/products")
-    }
+  const router = useRouter();
+  function redirect() {
+    router.push("/dashboard/products");
+  }
 
-    async function onSubmit(data){
-        {
-            /*
+  async function onSubmit(data) {
+    {
+      /*
             -id => auto()
             -title
             -slug => auto()
@@ -51,154 +57,163 @@ export default function NewProductForm({categories, farmers}) {
             -Farmer
             -tags[]
             */
-        }
-        const slug = generateSlug(data.title)
-        const productCode = generateUserCode("LLP", data.title)
-        data.slug = slug;
-        data.imageUrl = imageUrl;
-        data.tags = tags;
-        data.qty = 1;
-        data.productCode = productCode;
-        console.log(data);
-        makePostRequest(setLoading, "api/products", data, "Product", reset, redirect);
-        setImageUrl("")
-        setTags([]);
     }
+    const slug = generateSlug(data.title);
+    const productCode = generateUserCode("LLP", data.title);
+    data.slug = slug;
+    data.imageUrl = imageUrl;
+    data.tags = tags;
+    data.qty = 1;
+    data.productCode = productCode;
+    console.log(data);
+    makePostRequest(
+      setLoading,
+      "api/products",
+      data,
+      "Product",
+      reset,
+      redirect
+    );
+    setImageUrl("");
+    setTags([]);
+  }
 
-    return (
-        <div>
-            <FormHeader title="New Product"/>
+  return (
+    <div>
+      <FormHeader title="New Product" />
 
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3">
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <TextInput
-                        label="Product Title"
-                        name="title"
-                        register={register}
-                        errors={errors}
-                    />
-                    <TextInput
-                        label="Product SKU"
-                        name="sku"
-                        register={register}
-                        errors={errors}
-                        className='w-full'
-                    />
-                    <TextInput
-                        label="Product Barcode"
-                        name="barcode"
-                        register={register}
-                        errors={errors}
-                        className='w-full'
-                    />
-                    <TextInput
-                        label="Product Price(Before Discount)"
-                        name="productPrice"
-                        type='number'
-                        register={register}
-                        errors={errors}
-                        className='w-full'
-                    />
-                    <TextInput
-                        label="Product Sale Price(Discounted)"
-                        name="salePrice"
-                        type='number'
-                        register={register}
-                        errors={errors}
-                        className='w-full'
-                    />
-                    <TextInput
-                        label="Product Stock"
-                        name="productStock"
-                        type='number'
-                        register={register}
-                        errors={errors}
-                        className='w-full'
-                    />
-                    <TextInput
-                        label="Unit of Measurement( e.g. Kilograms)"
-                        name="unit"
-                        register={register}
-                        errors={errors}
-                        className='w-full'
-                    />
-                    <SelectInput
-                        label="Select Category"
-                        name="categoryId"
-                        register={register}
-                        errors={errors}
-                        options={categories}
-                        className='w-full'
-                    />
-                    <SelectInput
-                        label="Select Farmer"
-                        name="farmerId"
-                        register={register}
-                        errors={errors}
-                        options={farmers}
-                        className='w-full'
-                    />
-                    <ToggleInput
-                        label="Support Wholesale Selling"
-                        name="isWholesale"
-                        trueTitle="Supported"
-                        falseTitle="Not Supported"
-                        register={register}
-                    />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3"
+      >
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <TextInput
+            label="Product Title"
+            name="title"
+            register={register}
+            errors={errors}
+          />
+          <TextInput
+            label="Product SKU"
+            name="sku"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Product Barcode"
+            name="barcode"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Product Price(Before Discount)"
+            name="productPrice"
+            type="number"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Product Sale Price(Discounted)"
+            name="salePrice"
+            type="number"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Product Stock"
+            name="productStock"
+            type="number"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Unit of Measurement( e.g. Kilograms)"
+            name="unit"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <SelectInput
+            label="Select Category"
+            name="categoryId"
+            register={register}
+            errors={errors}
+            options={categories}
+            className="w-full"
+          />
+          <SelectInput
+            label="Select Farmer"
+            name="farmerId"
+            register={register}
+            errors={errors}
+            options={farmers}
+            className="w-full"
+          />
+          <ToggleInput
+            label="Support Wholesale Selling"
+            name="isWholesale"
+            trueTitle="Supported"
+            falseTitle="Not Supported"
+            register={register}
+          />
 
-                    {
-                        isWholeSale && (
-                            <>
-                                <TextInput
-                                    label="WholeSale Price"
-                                    name="wholesalePrice"
-                                    type='number'
-                                    register={register}
-                                    errors={errors}
-                                    className='w-full'
-                                />
-                                <TextInput
-                                    label="Minimum Wholesale Quantity"
-                                    name="wholesaleQty"
-                                    type='number'
-                                    register={register}
-                                    errors={errors}
-                                    className='w-full'
-                                />
-                            </>
-                        )
-                    }
+          {isWholeSale && (
+            <>
+              <TextInput
+                label="WholeSale Price"
+                name="wholesalePrice"
+                type="number"
+                register={register}
+                errors={errors}
+                className="w-full"
+              />
+              <TextInput
+                label="Minimum Wholesale Quantity"
+                name="wholesaleQty"
+                type="number"
+                register={register}
+                errors={errors}
+                className="w-full"
+              />
+            </>
+          )}
 
-                    <ImageInput
-                        imageUrl={imageUrl}
-                        setImageUrl={setImageUrl}
-                        endpoint='productImageUploader'
-                        label="Product Image"
-                    />
+          <ImageInput
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="productImageUploader"
+            label="Product Image"
+          />
 
-                    {/* TAGS */}
-                    <ArrayItemInput setItems={setTags} items={tags} itemTitle="Tag"/>
+          {/* TAGS */}
+          <ArrayItemInput setItems={setTags} items={tags} itemTitle="Tag" />
 
-                    <TextAreaInput
-                        label="Product Description"
-                        name="description"
-                        register={register}
-                        errors={errors}
-                    />
+          <TextAreaInput
+            label="Product Description"
+            name="description"
+            register={register}
+            errors={errors}
+          />
 
-                    <ToggleInput
-                        label="Publish your Product"
-                        name="isActive"
-                        trueTitle="Active"
-                        falseTitle="Inactive"
-                        register={register}
-                    />
-
-                </div>
-                <SubmitButton
-                    isLoading={loading}
-                    buttonTitle="Create Product" loadingButtonTitle="Creating product please wait..."/>
-            </form>
+          <ToggleInput
+            label="Publish your Product"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Inactive"
+            register={register}
+          />
         </div>
-    )
+        <SubmitButton
+          isLoading={loading}
+          buttonTitle="Create Product"
+          loadingButtonTitle="Creating product please wait..."
+        />
+      </form>
+    </div>
+  );
 }
