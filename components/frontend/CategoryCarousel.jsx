@@ -1,15 +1,16 @@
 "use client";
+import { BaggageClaim } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-export default function CategoryCarousel() {
+export default function CategoryCarousel({ products }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 6,
+      items: 4,
       slidesToSlide: 3, // optional, default to 1.
     },
     tablet: {
@@ -24,7 +25,6 @@ export default function CategoryCarousel() {
     },
   };
 
-  const slides = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   return (
     <Carousel
       swipeable={false}
@@ -44,20 +44,36 @@ export default function CategoryCarousel() {
       dotListClass="custom-dot-list-style"
       itemClass="px-4"
     >
-      {slides.map((slide, i) => {
+      {products.map((product, i) => {
         return (
-          <Link key={i} href="#" className="rounded-lg mr-3 bg-red-400">
-            <Image
-              src="/green apple.webp"
-              alt="green apple"
-              width={240}
-              height={240}
-              className="w-full"
-            />
-            <h2 className="text-center dark:text-slate-200 text-slate-800 mt-2">
-              Green Apple
-            </h2>
-          </Link>
+          <div
+            key={i}
+            className="rounded-lg overflow-hidden mr-3 bg-white dark:bg-slate-900 border shadow"
+          >
+            <Link href="#" className="">
+              <Image
+                src={product.imageUrl}
+                alt={product.title}
+                width={240}
+                height={240}
+                className="w-full h-48 object-cover"
+              />
+            </Link>
+            <div className="px-4">
+              <Link href="#" className="">
+                <h2 className="text-center dark:text-slate-200 text-slate-800 my-2 font-semibold">
+                  {product.title}
+                </h2>
+              </Link>
+              <div className="flex items-center justify-between gap-2 pb-3 dark:text-slate-200 text-slate-800">
+                <p className="">FCFA {product.salePrice}</p>
+                <button className="flex items-center space-x-2 bg-lime-600 px-4 py-2 rounded-md text-white">
+                  <BaggageClaim />
+                  <span className="">Add</span>
+                </button>
+              </div>
+            </div>
+          </div>
         );
       })}
     </Carousel>
