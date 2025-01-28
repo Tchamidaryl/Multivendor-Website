@@ -1,17 +1,13 @@
 
 const Footer = () => {
   return (
-    <section className="py-10 bg-gray-50 sm:pt-16 lg:pt-24">
+    <section className="py-10 bg-slate-100 dark:bg-slate-900 sm:pt-16 lg:pt-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
           <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
-            <img
-              className="w-auto h-9"
-              src="/mask.jpg"
-              alt="logo"
-            />
+            <img className="w-auto h-9" src="/mask.jpg" alt="logo" />
 
-            <p className="text-base leading-relaxed text-gray-600 mt-7">
+            <p className="text-base leading-relaxed text-gray-600 dark:text-slate-50 mt-7">
               Amet minim mollit non deserunt ullamco est sit aliqua dolor do
               amet sint. Velit officia consequat duis enim velit mollit.
             </p>
@@ -103,7 +99,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200  hover:text-lime-600 dark:hover:text-lime-600 focus:text-lime-600"
                 >
                   {" "}
                   About{" "}
@@ -114,7 +110,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200  hover:text-lime-600 dark:hover:text-lime-600 focus:text-lime-600"
                 >
                   {" "}
                   Features{" "}
@@ -125,7 +121,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200 hover:text-lime-600  dark:hover:text-lime-600  focus:text-lime-600"
                 >
                   {" "}
                   Works{" "}
@@ -136,7 +132,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200  hover:text-lime-600 dark:hover:text-lime-600 focus:text-lime-600"
                 >
                   {" "}
                   Career{" "}
@@ -155,7 +151,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200 hover:text-lime-600 dark:hover:text-lime-600 focus:text-lime-600"
                 >
                   {" "}
                   Customer Support{" "}
@@ -166,7 +162,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200 hover:text-lime-600 dark:hover:text-lime-600 focus:text-lime-600"
                 >
                   {" "}
                   Delivery Details{" "}
@@ -177,7 +173,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200 hover:text-lime-600 dark:hover:text-lime-600 focus:text-lime-600"
                 >
                   {" "}
                   Terms & Conditions{" "}
@@ -188,7 +184,7 @@ const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-base text-black transition-all duration-200 hover:text-lime-600 focus:text-lime-600"
+                  className="flex text-base text-black dark:text-slate-50 transition-all duration-200 hover:text-lime-600 dark:hover:text-lime-600 focus:text-lime-600"
                 >
                   {" "}
                   Privacy Policy{" "}
