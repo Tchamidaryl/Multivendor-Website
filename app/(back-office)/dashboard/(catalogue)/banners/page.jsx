@@ -1,20 +1,28 @@
-import PageHeader from '@/components/backoffice/PageHeader'
-import TableActions from '@/components/backoffice/TableActions'
-import React from 'react'
+import PageHeader from "@/components/backoffice/PageHeader";
+import TableActions from "@/components/backoffice/TableActions";
+import { getData } from "@/lib/getData";
+import React from "react";
+import { columns } from "./columns";
+import { DataTable } from "@/components/data-table-components/DataTable";
 
-export default function page() {
+export default async function page() {
+  const banners = await getData("banners");
   return (
     <div>
       {/* Header */}
-      <PageHeader heading="Banners" href="/dashboard/banners/new" linkTitle="Add Banner"/>
+      <PageHeader
+        heading="Banners"
+        href="/dashboard/banners/new"
+        linkTitle="Add Banner"
+      />
 
       {/* Table Actions */}
       {/* Export // Search // Bulk Delete */}
-      <TableActions/>
+      {/* <TableActions/> */}
 
-        <div className="py-8 text-slate-900 dark:text-slate-200">
-          <h2>Table</h2>
-        </div>
+      <div className="py-0">
+        <DataTable columns={columns} data={banners} />
+      </div>
     </div>
-  )
+  );
 }

@@ -89,7 +89,9 @@ export default function Cart() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500 w-1/2"
               placeholder="Enter Coupon"
             />
-            <button className="shrink-0 py-2.5 px-4 rounded-lg bg-lime-600">Apply Coupon</button>
+            <button className="shrink-0 py-2.5 px-4 rounded-lg bg-lime-600">
+              Apply Coupon
+            </button>
           </div>
         </div>
 
