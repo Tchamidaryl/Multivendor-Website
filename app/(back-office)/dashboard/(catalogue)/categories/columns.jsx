@@ -86,9 +86,7 @@ export const columns = [
   {
     accessorKey: "createdAt",
     header: "Date Created",
-    cell: ({ row }) => {
-      <DateColumn row={row}/>
-    },
+    cell: ({ row }) => (<DateColumn row={row} />),
   },
   {
     id: "actions",

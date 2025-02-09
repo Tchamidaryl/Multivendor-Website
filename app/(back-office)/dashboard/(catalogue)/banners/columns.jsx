@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import DateColumn from "@/components/DataTableColumns/DateColumn";
 
 export const columns = [
   {
@@ -89,18 +90,7 @@ export const columns = [
   {
     accessorKey: "createdAt",
     header: "Date Created",
-    cell: ({ row }) => {
-      const createdAt = row.getValue("createdAt");
-      const originalDate = new Date(createdAt);
-
-      const day = originalDate.getDate();
-      const month = originalDate.toLocaleString("default", { month: "short" });
-      const year = originalDate.getFullYear();
-
-      const formatted = `${day}th ${month} ${year}`;
-
-      return <div className="">{formatted}</div>;
-    },
+    cell: ({ row }) => <DateColumn row={row} />,
   },
   {
     id: "actions",
