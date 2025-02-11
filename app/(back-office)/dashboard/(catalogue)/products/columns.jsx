@@ -1,21 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import DateColumn from "@/components/DataTableColumns/DateColumn";
-import SortableColumn from "@/components/DataTableColumns/SortableColumn";
 import ImageColumn from "@/components/DataTableColumns/ImageColumn";
+import SortableColumn from "@/components/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/DataTableColumns/ActionColumn";
 
 export const columns = [
@@ -47,16 +35,12 @@ export const columns = [
   },
   {
     accessorKey: "imageUrl",
-    header: "Banner Image",
+    header: "Product Image",
     cell: ({ row }) => <ImageColumn row={row} accessorKey="imageUrl" />,
   },
   {
-    accessorKey: "link",
-    header: "Banner Link",
-  },
-  {
     accessorKey: "isActive",
-    header: "IsActive",
+    header: "Active",
   },
   {
     accessorKey: "createdAt",
@@ -65,6 +49,6 @@ export const columns = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <ActionColumn row={row} title="Banner" />,
+    cell: ({ row }) => <ActionColumn row={row} title="Product" />,
   },
 ];

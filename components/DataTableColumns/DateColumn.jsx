@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function DateColumn({row}) {
-  const createdAt = row.getValue("createdAt");
+export default function DateColumn({row, accessorKey}) {
+  const createdAt = row.getValue(`${accessorKey}`);
   const originalDate = new Date(createdAt);
 
   const day = originalDate.getDate();

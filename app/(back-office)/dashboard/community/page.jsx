@@ -1,20 +1,26 @@
 import PageHeader from '@/components/backoffice/PageHeader'
 import TableActions from '@/components/backoffice/TableActions'
+import { DataTable } from '@/components/data-table-components/DataTable';
 import React from 'react'
+import { columns } from './columns';
+import { getData } from '@/lib/getData';
 
-export default function page() {
+export default async function page() {
+  const trainings = await getData("trainings");
   return (
     <div>
       {/* Header */}
-      <PageHeader heading="Limi Community Training" href="/dashboard/community/new" linkTitle="Add Training"/>
+      <PageHeader
+        heading="Limi Community Training"
+        href="/dashboard/community/new"
+        linkTitle="Add Training"
+      />
 
       {/* Table Actions */}
       {/* Export // Search // Bulk Delete */}
-      <TableActions/>
-
-        <div className="py-8 text-slate-900 dark:text-slate-200">
-          <h2>Table</h2>
-        </div>
+      <div className="py-0">
+        <DataTable columns={columns} data={trainings} />
+      </div>
     </div>
-  )
+  );
 }
