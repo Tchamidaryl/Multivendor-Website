@@ -34,11 +34,9 @@ export const columns = [
     header: ({ column }) => <SortableColumn column={column} title="Title" />,
   },
   {
-    accessorKey: "imageUrl",
-    header: "Thumbnail",
-    cell: ({ row }) => (
-      <ImageColumn row={row} accessorKey="imageUrl" />
-    ),
+    accessorKey: "logoUrl",
+    header: "Market Logo",
+    cell: ({ row }) => <ImageColumn row={row} accessorKey="logoUrl" />,
   },
   {
     accessorKey: "isActive",
@@ -51,6 +49,6 @@ export const columns = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <ActionColumn row={row} title="Training" />,
+    cell: ({ row }) => <ActionColumn row={row} title="Farmer" />,
   },
 ];

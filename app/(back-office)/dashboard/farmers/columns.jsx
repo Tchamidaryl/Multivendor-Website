@@ -53,6 +53,6 @@ export const columns = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <ActionColumn row={row} title="Coupon" />,
+    cell: ({ row }) => <ActionColumn row={row} title="Farmer" />,
   },
 ];
