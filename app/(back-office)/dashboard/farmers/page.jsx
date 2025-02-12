@@ -19,7 +19,7 @@ export default async function Farmers() {
       {/* Table Actions */}
       {/* Export // Search // Bulk Delete */}
       <div className="py-0">
-        <DataTable columns={columns} data={farmers} />
+        <DataTable columns={columns} data={farmers} filterKeys={["name"]} />
       </div>
     </div>
   )

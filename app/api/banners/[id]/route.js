@@ -3,20 +3,17 @@ import { NextResponse } from "next/server";
 
 export async function GET(request, {params:{id}}) {
   try {
-    const category = await db.category.findUnique({
+    const banner = await db.banner.findUnique({
       where: {
         id
       },
-      include: {
-        products: true,
-      },
     });
-    return NextResponse.json(category);
+    return NextResponse.json(banner);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to get Category",
+        message: "Failed to get banner",
         error,
       },
       {
@@ -28,31 +25,31 @@ export async function GET(request, {params:{id}}) {
 
 export async function DELETE(request, {params:{id}}) {
   try {
-    const existingCategory = await db.category.findUnique({
+    const existingBanner = await db.banner.findUnique({
       where: {
         id
       },
     });
-    if (!existingCategory) {
+    if (!existingBanner) {
       return NextResponse.json({
         data: null,
-        message: "Category not found",
+        message: "Banner not found",
       },
         {
         status: 404,
       })
     }
-    const deletedCategory = await db.category.delete({
+    const deletedBanner = await db.banner.delete({
         where: {
           id,
         }
       })
-    return NextResponse.json(deletedCategory);
+    return NextResponse.json(deletedBanner);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to Delete Category",
+        message: "Failed to Delete Banner",
         error,
       },
       {

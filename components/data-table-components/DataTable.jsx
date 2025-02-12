@@ -33,8 +33,9 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { DataTablePagination } from "./DataTablePagination";
 import DataTableViewOptions from "./DataTableViewOptions";
+import DataTableToolbar from "./DataTableToolbar";
 
-export function DataTable({ columns, data }) {
+export function DataTable({ columns, data, filterKeys=["title"] }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -59,18 +60,8 @@ export function DataTable({ columns, data }) {
   });
 
   return (
-    <div className="">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter titles..."
-          value={table.getColumn("title")?.getFilterValue() ?? ""}
-          onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DataTableViewOptions table={table} />
-      </div>
+    <div className="space-y-4">
+      <DataTableToolbar table={table} filterKeys={filterKeys} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -122,29 +113,7 @@ export function DataTable({ columns, data }) {
         </Table>
       </div>
       {/* Pagination */}
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
         <DataTablePagination table={table} />
-        {/* <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button> */}
-      </div>
     </div>
   );
 }
