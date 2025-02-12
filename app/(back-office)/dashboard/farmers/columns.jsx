@@ -36,7 +36,9 @@ export const columns = [
   {
     accessorKey: "farmerProfileImageUrl",
     header: "Profile Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey="farmerProfileImageUrl" />,
+    cell: ({ row }) => (
+      <ImageColumn row={row} accessorKey="farmerProfileImageUrl" />
+    ),
   },
   {
     accessorKey: "email",
@@ -53,6 +55,15 @@ export const columns = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <ActionColumn row={row} title="Farmer" />,
+    cell: ({ row }) => {
+      const farmer = row.original;
+      return (
+        <ActionColumn
+          row={row}
+          title="Farmer"
+          endpoint={`farmers/${farmer.id}`}
+        />
+      );
+    },
   },
 ];

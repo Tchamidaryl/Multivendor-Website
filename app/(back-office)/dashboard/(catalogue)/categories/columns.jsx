@@ -71,10 +71,14 @@ export const columns = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const category = row.original
-      return(
-        <ActionColumn row={row} title="Category" endpoint={`categories/${category.id}`} />
-      )
-  }
+      const category = row.original;
+      return (
+        <ActionColumn
+          row={row}
+          title="Category"
+          endpoint={`categories/${category.id}`}
+        />
+      );
+    },
   },
 ];
