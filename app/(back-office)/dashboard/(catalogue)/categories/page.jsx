@@ -6,7 +6,7 @@ import { columns } from './columns'
 import { DataTable } from '@/components/data-table-components/DataTable';
 
 export default async function page() {
-  const categories = await getData("categories");
+  const categoriesData = await getData("categories");
   return (
     <div>
       {/* Header */}
@@ -21,7 +21,7 @@ export default async function page() {
       {/* <TableActions /> */}
 
       <div className="py-0">
-        <DataTable columns={columns} data={categories} />
+        <DataTable columns={columns} data={categoriesData} />
       </div>
     </div>
   );

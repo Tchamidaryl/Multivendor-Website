@@ -6,7 +6,7 @@ import { columns } from './columns';
 import { getData } from '@/lib/getData';
 
 export default async function page() {
-  const trainings = await getData("trainings");
+  const trainingsData = await getData("trainings");
   return (
     <div>
       {/* Header */}
@@ -19,7 +19,7 @@ export default async function page() {
       {/* Table Actions */}
       {/* Export // Search // Bulk Delete */}
       <div className="py-0">
-        <DataTable columns={columns} data={trainings} />
+        <DataTable columns={columns} data={trainingsData} />
       </div>
     </div>
   );

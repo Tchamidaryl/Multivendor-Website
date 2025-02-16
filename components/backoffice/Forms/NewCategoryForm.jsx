@@ -1,7 +1,6 @@
 "use client";
 import FormHeader from "@/components/backoffice/FormHeader";
 import ImageInput from "@/components/FormInputs/ImageInput";
-// import QuillEditor from '@/components/FormInputs/QuillEditor'
 import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
@@ -9,22 +8,15 @@ import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-const QuillEditor = dynamic(
-  () => import("@/components/FormInputs/QuillEditor"),
-  {
-    ssr: false,
-  }
-);
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function NewTrainingForm({ categories, updateData = {} }) {
+export default function NewCategoryForm({ updateData = {} }) {
   const initialImageUrl = updateData?.imageUrl ?? "";
   const id = updateData?.id ?? "";
-  const initialContent = updateData?.content ?? "";
   const [imageUrl, setImageUrl] = useState(initialImageUrl);
+  // const markets = []
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -38,45 +30,39 @@ export default function NewTrainingForm({ categories, updateData = {} }) {
       ...updateData,
     },
   });
-
-  //Quill Editor
-  const [content, setContent] = useState(initialContent);
-  //Quill Editor End
-
   const isActive = watch("isActive");
   const router = useRouter();
   function redirect() {
-    router.push("/dashboard/community");
+    router.push("/dashboard/categories");
   }
 
   async function onSubmit(data) {
     const slug = generateSlug(data.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
-    data.content = content;
     console.log(data);
     if (id) {
       data.id = id;
-      //make put request
+      // Make Put Request (Update)
       makePutRequest(
         setLoading,
-        `api/trainings/${id}`,
+        `api/categories/${id}`,
         data,
-        "Training",
+        "Category",
         redirect
       );
-      console.log("Updated training: ", data);
+      console.log("Update Request: ", data);
     } else {
+      // Make Post Request (Create)
       makePostRequest(
         setLoading,
-        "api/trainings",
+        "api/categories",
         data,
-        "Training",
+        "Category",
         reset,
         redirect
       );
       setImageUrl("");
-      setContent("");
     }
   }
 
@@ -87,22 +73,13 @@ export default function NewTrainingForm({ categories, updateData = {} }) {
     >
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
         <TextInput
-          label="Training Title"
+          label="Category Title"
           name="title"
           register={register}
           errors={errors}
-          className="w-full"
-        />
-        <SelectInput
-          label="Select Category"
-          name="categoryId"
-          register={register}
-          errors={errors}
-          options={categories}
-          className="w-full"
         />
         <TextAreaInput
-          label="Training Description"
+          label="Category Description"
           name="description"
           register={register}
           errors={errors}
@@ -110,18 +87,11 @@ export default function NewTrainingForm({ categories, updateData = {} }) {
         <ImageInput
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
-          endpoint="trainingImageUploader"
-          label="Training Thumbnail"
+          endpoint="categoryImageUploader"
+          label="Category Image"
         />
-        {/* content */}
-        <QuillEditor
-          label="Training Content"
-          value={content}
-          onChange={setContent}
-        />
-        {/* content end */}
         <ToggleInput
-          label="Publish your Training"
+          label="Publish your Category"
           name="isActive"
           trueTitle="Active"
           falseTitle="Inactive"
@@ -130,10 +100,10 @@ export default function NewTrainingForm({ categories, updateData = {} }) {
       </div>
       <SubmitButton
         isLoading={loading}
-        buttonTitle={id ? "Update Training" : "Create Training"}
+        buttonTitle={id ? "Update Category" : "Create Category"}
         loadingButtonTitle={`${
           id ? "Updating" : "Creating"
-        } Training please wait...`}
+        } Category please wait...`}
       />
     </form>
   );

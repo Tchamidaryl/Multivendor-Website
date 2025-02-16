@@ -1,9 +1,14 @@
-import React from 'react'
+import FormHeader from "@/components/backoffice/FormHeader";
+import NewFarmerForm from "@/components/backoffice/NewFarmerForm";
+import { getData } from "@/lib/getData";
 
-export default function UpdateFarmer() {
+export default async function UpdateFarmer({ params: { id } }) {
+  const farmer = await getData(`farmers/${id}`);
   return (
     <div>
-        <h2>Update Farmer</h2>
+      <FormHeader title="Update Farmer" />
+
+      <NewFarmerForm />
     </div>
-  )
+  );
 }

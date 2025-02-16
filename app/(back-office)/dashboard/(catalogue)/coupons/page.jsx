@@ -6,7 +6,7 @@ import React from 'react'
 import { columns } from './columns';
 
 export default async function Coupons() {
-  const coupons = await getData("coupons");
+  const couponsData = await getData("coupons");
   return (
     <div>
       {/* Header */}
@@ -19,7 +19,7 @@ export default async function Coupons() {
       {/* Table Actions */}
       {/* Export // Search // Bulk Delete */}
       <div className="py-0">
-        <DataTable columns={columns} data={coupons} />
+        <DataTable columns={columns} data={couponsData} />
       </div>
     </div>
   );

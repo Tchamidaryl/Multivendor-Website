@@ -71,9 +71,10 @@ export const columns = [
         <ActionColumn
           row={row}
           title="Banner"
+          editEndpoint={`banners/update/${banner.id}`}
           endpoint={`banners/${banner.id}`}
         />
       );
-    }
+    },
   },
 ];

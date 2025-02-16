@@ -6,7 +6,7 @@ import { columns } from './columns'
 import { getData } from '@/lib/getData'
 
 export default async function Farmers() {
-  const farmers = await getData("farmers");
+  const farmersData = await getData("farmers");
   return (
     <div>
       {/* Header */}
@@ -19,7 +19,7 @@ export default async function Farmers() {
       {/* Table Actions */}
       {/* Export // Search // Bulk Delete */}
       <div className="py-0">
-        <DataTable columns={columns} data={farmers} filterKeys={["name"]} />
+        <DataTable columns={columns} data={farmersData} filterKeys={["name"]} />
       </div>
     </div>
   )

@@ -55,6 +55,7 @@ export const columns = [
         <ActionColumn
           row={row}
           title="Market"
+          editEndpoint={`markets/update/${market.id}`}
           endpoint={`markets/${market.id}`}
         />
       );
