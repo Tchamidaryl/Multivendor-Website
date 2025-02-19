@@ -80,8 +80,8 @@ model Product {
   unit        String?
   productPrice  Float
   salePrice     Float
-  wholesalePrice     Float
-  wholesaleQty     Int
+  wholesalePrice     Float?
+  wholesaleQty     Int?
   productStock     Int
   qty     Int
   tags          String[]

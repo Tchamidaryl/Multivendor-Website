@@ -7,7 +7,7 @@ import Link from "next/link";
 import React from "react";
 
 export default async function ProductDetailPage({ params: { slug } }) {
-  const category = await getData("/categories/6778c534e3b8ca50166ef194");
+  const category = await getData("/categories/67b275865eacadbfb719e057");
   return (
     <div>
       <BreadCrumb />

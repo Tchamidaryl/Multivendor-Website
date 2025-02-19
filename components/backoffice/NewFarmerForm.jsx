@@ -11,7 +11,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ArrayItemInput from "../FormInputs/ArrayItemInput";
 
-export default function NewFarmerForm({ user }) {
+export default function NewFarmerForm({ user, updateData = {} }) {
+  const id = updateData?.id ?? "";
   const [loading, setLoading] = useState(false);
   const [farmerProfileImageUrl, setFarmerProfileImageUrl] = useState("");
   const [couponCode, setCouponCode] = useState();
@@ -151,8 +152,10 @@ export default function NewFarmerForm({ user }) {
       </div>
       <SubmitButton
         isLoading={loading}
-        buttonTitle="Create Farmer"
-        loadingButtonTitle="Creating Farmer please wait..."
+        buttonTitle={id ? "Update Farmer" : "Create Farmer"}
+        loadingButtonTitle={`${
+          id ? "Updating" : "Creating"
+        } Farmer please wait...`}
       />
     </form>
   );

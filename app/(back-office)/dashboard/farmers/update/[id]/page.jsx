@@ -8,7 +8,7 @@ export default async function UpdateFarmer({ params: { id } }) {
     <div>
       <FormHeader title="Update Farmer" />
 
-      <NewFarmerForm />
+      <NewFarmerForm updateData={farmer} />
     </div>
   );
 }

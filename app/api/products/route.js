@@ -2,29 +2,6 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  {
-    /*
-        -barcode
-        -categoryId
-        -description
-        -userId:farmerId
-        -imageUrl
-        -isActive
-        -isWholesale
-        -productCode
-        -productPrice
-        -salePrice
-        -sku
-        -slug
-        -tags
-        -title
-        -unit
-        -wholesalePrice
-        -wholesaleQty
-        -productStock
-        -qty
-        */
-  }
   try {
     const {
       barcode,
@@ -65,9 +42,9 @@ export async function POST(request) {
     const newProduct = await db.product.create({
       data: {
         barcode,
-        categoryId,
+        category: { connect: { id: categoryId } },
         description,
-        userId: farmerId,
+        user: { connect: { id: farmerId } },
         imageUrl,
         isActive,
         isWholesale,
