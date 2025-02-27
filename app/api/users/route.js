@@ -1,6 +1,10 @@
 import db from "@/lib/db";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
+import base64url from "base64url";
+import { Resend} from "resend"
+import { EmailTemplate } from "@/components/email-template"
 
 export async function POST(request) {
   try {
@@ -35,6 +39,10 @@ export async function POST(request) {
       },
     });
     console.log(newUser);
+    //SEND THE EMAIL IF USER ROLE == FARMER
+    if (role === "FARMER") {
+      
+    }
     return NextResponse.json(
       {
         data: newUser,

@@ -43,7 +43,7 @@ export default function RegisterForm({ role = "USER" }) {
         if (role === "USER") {
           router.push("/");
         } else {
-          router.push(`/onboarding/${responseData.data.id}`);
+          router.push(`/verify-email`);
         }
       } else {
         setLoading(false);
@@ -106,15 +106,38 @@ export default function RegisterForm({ role = "USER" }) {
         buttonTitle="Register"
         loadingButtonTitle="Creating please wait"
       />
-      <p className="text-sm font-light text-gray-500 dark:text-gray-400 py-4">
-        Already have an account?{" "}
-        <Link
-          href="/login"
-          className="font-medium text-purple-600 hover:underline dark:text-purple-500"
-        >
-          Login
-        </Link>
-      </p>
+      <div className="flex justify-between">
+        <p className="text-[0.75rem] font-light text-gray-500 dark:text-gray-400 py-4">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="font-medium text-purple-600 hover:underline dark:text-purple-500"
+          >
+            Login
+          </Link>
+        </p>
+        {role === "USER" ? (
+          <p className="text-[0.75rem] font-light text-gray-500 dark:text-gray-400 py-4">
+            Are you a Farmer?{" "}
+            <Link
+              href="/register-farmer"
+              className="font-medium text-purple-600 hover:underline dark:text-purple-500"
+            >
+              Register here
+            </Link>
+          </p>
+        ) : (
+          <p className="text-[0.75rem] font-light text-gray-500 dark:text-gray-400 py-4">
+            Are you a User?{" "}
+            <Link
+              href="/register"
+              className="font-medium text-purple-600 hover:underline dark:text-purple-500"
+            >
+              Register here
+            </Link>
+          </p>
+        )}
+      </div>
     </form>
   );
 }

@@ -6,7 +6,7 @@ export default function EmptyCart() {
     <div className="flex items-center justify-center min-h-screen">
       <p className="md:text-2xl">
         Your Cart Is Empty,{" "}
-        <Link className="text-slate-800 dark:text-lime-500" href="/">
+        <Link className="text-lime-500" href="/">
           Start Shopping
         </Link>
       </p>

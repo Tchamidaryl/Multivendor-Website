@@ -7,6 +7,7 @@ import {
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 export default function CartProduct({ cartItem }) {
@@ -14,6 +15,7 @@ export default function CartProduct({ cartItem }) {
   function handleCartItemDelete(cartId) {
     //Dispatch the removeFromCart reducer
     dispatch(removeFromCart(cartId));
+    toast.success("Item removed Successfully!");
   }
   function handleQtyIncrement(cartId) {
     //Dispatch the incrementQty reducer
