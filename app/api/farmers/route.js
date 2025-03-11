@@ -20,7 +20,35 @@ export async function POST(request) {
         mainCrop,
         userId
         */
+    //Update the email verification in the user
     const farmerData = await request.json();
+    //Check if the user already exists in the database
+    const existingUser = await db.user.findUnique({
+      where: {
+        id: farmerData.userId,
+      },
+    });
+    if (!existingUser) {
+      return NextResponse.json(
+        {
+          data: null,
+          message: "No User found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+    //Update emailVerified
+    const updatedUser = await db.user.update({
+      where: {
+        id: farmerData.userId,
+      },
+      data: {
+        emailVerified: true,
+      },
+    });
+
     const newFarmerProfile = await db.farmerProfile.create({
       data: {
         farmerUniqueCode: farmerData.farmerUniqueCode,

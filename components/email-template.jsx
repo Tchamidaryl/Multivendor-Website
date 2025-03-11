@@ -1,12 +1,14 @@
 import {
   Body,
   Button,
+  Column,
   Container,
   Head,
   Html,
   Img,
   Link,
   Preview,
+  Row,
   Section,
   Text,
 } from "@react-email/components";
@@ -14,11 +16,7 @@ import * as React from "react";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const EmailTemplate = ({
-  name = "",
-  redirectUrl = "/login",
-  linkText,
-}) => (
+export const EmailTemplate = ({ name = "", redirectUrl = "/login", linkText }) => (
   <Html>
     <Head />
     <Preview>
@@ -65,10 +63,10 @@ export const EmailTemplate = ({
                   <Column>
                     <Link href="/">
                       <Img
-                        src={`${baseUrl}/static/slack-twitter.png`}
+                        src={`${baseUrl}/static/github.png`}
                         width="32"
                         height="32"
-                        alt="Slack"
+                        alt="github"
                         style={socialMediaIcon}
                       />
                     </Link>

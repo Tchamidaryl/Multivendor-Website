@@ -6,7 +6,7 @@ export default function LargeCard({data}) {
     <div className={`rounded-lg text-white shadow-md p-8 flex items-center flex-col gap-2 ${data.color}`}>
         <Layers/>
         <h4 className="">{data.period}</h4>
-        <h2 className="text-2xl lg:text-3xl">CFA {data.sales}</h2>
+        <h2 className="text-2xl lg:text-3xl">FCFA {data.sales}</h2>
     </div>
   )
 }

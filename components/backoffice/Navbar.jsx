@@ -12,15 +12,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 import ThemeSwitcherBtn from '../ThemeSwitcherBtn'
 import Link from 'next/link'
+import UserAvatar from './UserAvatar'
 
 
 export default function Navbar({setShowSidebar, showSidebar}) {
+  const user = {}
   return (
     <div className="flex items-center justify-between bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full md:left-64 right-0 z-50 sm:pr-[20rem]">
       <Link href={"/dashboard"} className="sm:hidden">Logo</Link>
       {/* Icons */}
       <button onClick={() => setShowSidebar(!showSidebar)} className="text-lime-700 dark:text-lime-500">
-        <AlignJustify/>
+        <AlignJustify className='md:hidden block'/>
       </button>
       {/* 3 Icons */}
       <div className="flex space-x-3">
@@ -95,33 +97,7 @@ export default function Navbar({setShowSidebar, showSidebar}) {
         </DropdownMenu>
 
         {/* My Account */}
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <button><Image src='/profile.png' alt="User profile" width={200} height={200} className="w-8 h-8 rounded-full"/></button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="px-4 py-2 pr-8">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <button className="flex items-center space-x-2">
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                <span>Dashboard</span>
-              </button>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <button className="flex items-center space-x-2">
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Edit Profile</span>
-              </button>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <button className="flex items-center space-x-2">
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Logout</span>
-              </button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <UserAvatar user={user}/>
       </div>
     </div>
   )
