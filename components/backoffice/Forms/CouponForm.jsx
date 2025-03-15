@@ -4,7 +4,7 @@ import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import { convertIsoDateToNormal } from "@/lib/convertIsoDateToNormal";
-import { generateCouponCode } from "@/lib/generateCouponCode";
+import { generateCouponCode } from "@/lib/generateCoupon";
 import { generateIsoFormattedDate } from "@/lib/generateIsoFormattedDate";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";

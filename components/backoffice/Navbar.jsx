@@ -1,3 +1,4 @@
+"use client"
 import { AlignJustify, Bell, LayoutDashboard, LogOut, Settings, Sun, User, X } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
@@ -13,16 +14,19 @@ import {
 import ThemeSwitcherBtn from '../ThemeSwitcherBtn'
 import Link from 'next/link'
 import UserAvatar from './UserAvatar'
+import { useSession } from 'next-auth/react'
 
-
-export default function Navbar({setShowSidebar, showSidebar}) {
-  const user = {}
+export default function Navbar({ setShowSidebar, showSidebar }) {
+  const { data: session, status } = useSession()
+  if (status === "loading") {
+    return <p className=''>Loading...</p>
+  }
   return (
     <div className="flex items-center justify-between bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full md:left-64 right-0 z-50 sm:pr-[20rem]">
       <Link href={"/dashboard"} className="sm:hidden">Logo</Link>
       {/* Icons */}
       <button onClick={() => setShowSidebar(!showSidebar)} className="text-lime-700 dark:text-lime-500">
-        <AlignJustify className='md:hidden block'/>
+        <AlignJustify className=''/>
       </button>
       {/* 3 Icons */}
       <div className="flex space-x-3">
@@ -97,7 +101,7 @@ export default function Navbar({setShowSidebar, showSidebar}) {
         </DropdownMenu>
 
         {/* My Account */}
-        <UserAvatar user={user}/>
+        <UserAvatar user={session?.user}/>
       </div>
     </div>
   )

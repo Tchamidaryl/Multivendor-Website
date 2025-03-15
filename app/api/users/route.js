@@ -56,11 +56,20 @@ export async function POST(request) {
       const userId = newUser.id;
       const linkText = "Verify Account";
       const redirectUrl = `onboarding/${userId}?token=${token}`;
+      const description =
+        "Thank you, for Creating an Account with Us. We request you to click on the link Below in order to complete your onboarding process. Thank you";
+      const subject = "Account Creation - TdMultiven";
       const sendMail = await resend.emails.send({
         from: "Multivendor <info@tdmultiven.com>",
         to: email,
         subject: "Account Verification - Limi Ecommerce",
-        react: EmailTemplate({ name, redirectUrl, linkText }),
+        react: EmailTemplate({
+          name,
+          redirectUrl,
+          linkText,
+          description,
+          subject,
+        }),
       });
       console.log(sendMail);
       //Upon Click redirect them to the onboarding page

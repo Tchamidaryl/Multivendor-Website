@@ -1,29 +1,49 @@
-'use client'
-import React, { useState} from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import logo from '../../public/logo-dark.jpg'
-import { Boxes, Building2, ChevronDown, ChevronRight, ExternalLink, HeartHandshake, LayoutGrid, LayoutList, LecternIcon, LogOut, MonitorPlay, ScanSearch, Slack, Truck, User, Users2, UserSquare2, Wallet, Warehouse } from 'lucide-react'
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "../../public/tdLogo.webp";
+import {
+  Boxes,
+  Building2,
+  ChevronDown,
+  ChevronRight,
+  ExternalLink,
+  HeartHandshake,
+  LayoutGrid,
+  LayoutList,
+  LecternIcon,
+  LogOut,
+  MonitorPlay,
+  ScanSearch,
+  Slack,
+  Truck,
+  User,
+  Users2,
+  UserSquare2,
+  Wallet,
+  Warehouse,
+} from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 
-import { usePathname, useRouter } from 'next/navigation'
-import { signOut, useSession } from 'next-auth/react'
+import { usePathname, useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Sidebar({ showSidebar, setShowSidebar }) {
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
-  const { data: session, status } = useSession()
-  if(status === "loading"){
+  const { data: session, status } = useSession();
+  if (status === "loading") {
     return <p className="text-slate-900 dark:text-slate-100">Loading...</p>;
   }
-  let userLinks;
+
   const role = session?.user?.role;
 
-  const pathname = usePathname()
+  const pathname = usePathname();
   let sidebarLinks = [
     {
       title: "Customers",
@@ -78,25 +98,25 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
   ];
   let catalogLinks = [
     {
-      title:"Products",
+      title: "Products",
       icon: Boxes,
-      href:"/dashboard/products",
+      href: "/dashboard/products",
     },
     {
-      title:"Categories",
+      title: "Categories",
       icon: LayoutList,
-      href:"/dashboard/categories",
+      href: "/dashboard/categories",
     },
     {
-      title:"Coupons",
+      title: "Coupons",
       icon: ScanSearch,
-      href:"/dashboard/coupons",
+      href: "/dashboard/coupons",
     },
     {
-      title:"Store Banners",
+      title: "Store Banners",
       icon: MonitorPlay,
-      href:"/dashboard/banners",
-    }
+      href: "/dashboard/banners",
+    },
   ];
   if (role === "FARMER") {
     sidebarLinks = [
@@ -142,7 +162,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       },
     ];
   }
-  if(role === "USER"){
+  if (role === "USER") {
     sidebarLinks = [
       {
         title: "Orders",
@@ -160,7 +180,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         href: "/",
       },
     ];
-    catalogLinks = []
+    catalogLinks = [];
   }
 
   async function handleLogout() {
@@ -187,7 +207,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
           height={60}
           className="rounded-full"
         />
-        <p className="ml-4 font-bold text-2xl">Company Name</p>
+        <p className="ml-4 font-bold text-2xl">Tdmultiven</p>
       </Link>
       <div className="space-y-3 flex flex-col">
         <Link
@@ -260,7 +280,10 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
           );
         })}
         <div className="px-6 py-2">
-          <button onClick={handleLogout} className="bg-lime-600 rounded-md flex items-center space-x-3 px-6 py-3">
+          <button
+            onClick={handleLogout}
+            className="bg-lime-600 rounded-md flex items-center space-x-3 px-6 py-3"
+          >
             <LogOut />
             <span>Logout</span>
           </button>

@@ -12,8 +12,10 @@ import Image from "next/image";
 import { LayoutDashboard, LogOut, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function UserAvatar({ user }) {
+  const { name, image } = user;
   const router = useRouter();
   async function handleLogout() {
     await signOut();
@@ -23,23 +25,29 @@ export default function UserAvatar({ user }) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <button>
-          <Image
-            src="/profile.png"
-            alt="User profile"
-            width={200}
-            height={200}
-            className="w-8 h-8 rounded-full"
-          />
+          {image ? (
+            <Image
+              src="/profile.png"
+              alt="User profile"
+              width={200}
+              height={200}
+              className="w-8 h-8 rounded-full"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-blue-600 flex justify-center items-center">
+              <p className="text-slate-50">TD</p>
+            </div>
+          )}
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="px-4 py-2 pr-8">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <button className="flex items-center space-x-2">
+          <Link href="/dashboard" className="flex items-center space-x-2">
             <LayoutDashboard className="mr-2 h-4 w-4" />
             <span>Dashboard</span>
-          </button>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <button className="flex items-center space-x-2">

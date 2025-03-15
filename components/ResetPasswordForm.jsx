@@ -19,9 +19,9 @@ export default function ResetPasswordForm() {
 
   async function onSubmit(data) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const token = searchParams.get("token");
     const id = searchParams.get("id");
     data.id = id;
+    console.log(data)
     try {
       setLoading(true);
       const response = await fetch(`${baseUrl}/api/users/update-password`, {
