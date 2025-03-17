@@ -37,13 +37,13 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
+  const pathname = usePathname();
   if (status === "loading") {
     return <p className="text-slate-900 dark:text-slate-100">Loading...</p>;
   }
 
   const role = session?.user?.role;
 
-  const pathname = usePathname();
   let sidebarLinks = [
     {
       title: "Customers",

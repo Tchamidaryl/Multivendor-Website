@@ -131,7 +131,7 @@ export default function LoginForm() {
       </div>
 
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Don't have an account?{" "}
+        Do not have an account?{" "}
         <Link
           href="/register"
           className="font-medium text-lime-600 hover:underline dark:text-lime-500"
