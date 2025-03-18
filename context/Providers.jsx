@@ -9,6 +9,7 @@ import { store } from "@/redux/store";
 import { SessionProvider } from "next-auth/react";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 
+
 export default function Providers({ children }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark">
