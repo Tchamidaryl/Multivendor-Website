@@ -3,6 +3,8 @@ import NewProductForm from "@/components/backoffice/NewProductForm";
 import { getData } from "@/lib/getData";
 import React from "react";
 
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 export default async function NewProduct() {
   // Categories and farmers
   const categoriesData = await getData("categories");

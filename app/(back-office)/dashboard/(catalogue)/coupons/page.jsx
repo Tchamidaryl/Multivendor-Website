@@ -5,6 +5,8 @@ import { getData } from '@/lib/getData';
 import React from 'react'
 import { columns } from './columns';
 
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 export default async function Coupons() {
   const couponsData = await getData("coupons");
   return (

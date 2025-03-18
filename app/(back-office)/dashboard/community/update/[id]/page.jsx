@@ -3,6 +3,8 @@ import NewTrainingForm from "@/components/backoffice/NewTrainingForm";
 import { getData } from "@/lib/getData";
 import React from "react";
 
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 export default async function UpdateTraining({ params: { id } }) {
   const training = await getData(`trainings/${id}`);
   console.log(training);

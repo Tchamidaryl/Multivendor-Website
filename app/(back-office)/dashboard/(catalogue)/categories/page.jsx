@@ -5,6 +5,8 @@ import React from 'react'
 import { columns } from './columns'
 import { DataTable } from '@/components/data-table-components/DataTable';
 
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 export default async function page() {
   const categoriesData = await getData("categories");
   return (

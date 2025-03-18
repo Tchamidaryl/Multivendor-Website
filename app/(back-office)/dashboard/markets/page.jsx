@@ -5,6 +5,8 @@ import React from 'react'
 import { columns } from './columns';
 import { getData } from '@/lib/getData';
 
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 export default async function page() {
   const marketsData = await getData("markets");
   return (

@@ -9,6 +9,8 @@ import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import React from "react";
 
+export const dynamic = "force-dynamic"; // Forces Next.js to render dynamically
+
 export default async function page() {
   const session = await getServerSession(authOptions);
   const role = session?.user?.role;

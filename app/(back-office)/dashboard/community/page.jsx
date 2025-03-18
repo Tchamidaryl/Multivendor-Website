@@ -5,6 +5,8 @@ import React from 'react'
 import { columns } from './columns';
 import { getData } from '@/lib/getData';
 
+export const dynamic = "force-dynamic"; // Ensure Next.js renders dynamically
+
 export default async function page() {
   const trainingsData = await getData("trainings");
   return (

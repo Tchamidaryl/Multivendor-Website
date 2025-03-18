@@ -2,6 +2,8 @@ import PageHeader from '@/components/backoffice/PageHeader'
 import TableActions from '@/components/backoffice/TableActions'
 import React from 'react'
 
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 export default function Staff() {
   return (
     <div>
