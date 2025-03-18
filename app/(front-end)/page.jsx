@@ -8,7 +8,7 @@ import { getData } from "@/lib/getData";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 
-
+export const dynamic = "force-dynamic"; // Ensure Next.js renders dynamically
 
 export default async function Home() {
   const categoriesData = await getData("categories");
