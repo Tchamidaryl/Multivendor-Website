@@ -26,7 +26,6 @@ export default function UserAvatar({ user = {} }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <button>
           {image ? (
             <Image
               src="/profile.png"
@@ -40,7 +39,6 @@ export default function UserAvatar({ user = {} }) {
               <p className="text-slate-50">{initials}</p>
             </div>
           )}
-        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="px-4 py-2 pr-8">
         <DropdownMenuLabel>{name}</DropdownMenuLabel>

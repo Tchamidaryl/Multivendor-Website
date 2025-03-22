@@ -31,12 +31,14 @@ export default function CartSubTotalCart({ subTotal }) {
         <span className="">Total</span>
         <span className="">FCFA {totalPrice}</span>
       </div>
-      <Link
-        href="#"
-        className="bg-slate-200 text-slate-900 rounded-lg py-2 px-4 font-normal"
-      >
-        Continue to Payment
-      </Link>
+      <div className="mt-8">
+        <Link
+          href="/checkout"
+          className="text-slate-50 rounded-lg py-3 px-6 font-normal bg-slate-900 dark:bg-lime-600"
+        >
+          Continue to Checkout
+        </Link>
+      </div>
     </div>
   );
 }

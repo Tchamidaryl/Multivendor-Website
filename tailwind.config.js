@@ -4,7 +4,7 @@ import flowbite from "flowbite-react/tailwind"
 /** @type {import('tailwindcss').Config} */
 import { withUt } from "uploadthing/tw";
 export default withUt({
-	darkMode: ["class"],
+	darkMode: "class",
 	content: [
 		"app/**/*.{js,jsx,ts,tsx}",
 		"components/**/*.{js,jsx,ts,tsx}",

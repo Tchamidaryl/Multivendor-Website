@@ -11,9 +11,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function CouponForm({ updateData = {} }) {
- const expiryDateNormal = convertIsoDateToNormal(updateData.expiryDate);
- const id = updateData?.id ?? "";
- updateData.expiryDate = expiryDateNormal;
+  const expiryDateNormal = convertIsoDateToNormal(updateData.expiryDate);
+  const id = updateData?.id ?? "";
+  updateData.expiryDate = expiryDateNormal;
   const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState();
   const {
@@ -86,6 +86,7 @@ export default function CouponForm({ updateData = {} }) {
           register={register}
         />
       </div>
+
       <SubmitButton
         isLoading={loading}
         buttonTitle={id ? "Update Coupon" : "Create Coupon"}
