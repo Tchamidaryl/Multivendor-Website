@@ -2,7 +2,10 @@ import NewFarmerForm from "@/components/backoffice/NewFarmerForm";
 import { getData } from "@/lib/getData";
 import React from "react";
 
-export default async function page({ params: { id } }) {
+export const dynamic = "force-dynamic"; // Ensure Next.js renders dynamically
+
+export default async function page({ params }) {
+  const { id } = await params; // Await params first
   const user = await getData(`users/${id}`);
   console.log(user);
   return (

@@ -48,7 +48,7 @@ export async function PUT(request) {
     console.log(userId, name, redirectUrl)
     const description =
       "Click on the following link in order to reset your password. Thank you";
-    const subject = "Password Reset - TdMultiven";
+    const subject = "Password Reset - tdMultiven";
     console.log(userId, name, redirectUrl);
     const sendMail = await resend.emails.send({
       from: "Multivendor <info@tdmultiven.com>",

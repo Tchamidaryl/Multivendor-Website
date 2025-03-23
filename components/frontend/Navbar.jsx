@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between py-3 max-w-6xl mx-auto px-8 gap-8">
         {/* Logo */}
         <Link className="" href="/">
-          <Image src={logo} alt="limifood logo" className="w-24" />
+          <Image src={logo} width={1024} height={1024} alt="limifood logo" className="w-24 h-24 rounded-xl" />
         </Link>
         {/* Search */}
         <div className="flex-grow">
