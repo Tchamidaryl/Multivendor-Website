@@ -50,8 +50,8 @@ export default function Navbar({ setShowSidebar, showSidebar }) {
         {/* Notification */}
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <button
-              type="button"
+            <div
+              // type="button"
               className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-transparent rounded-lg"
             >
               <Bell className="text-lime-700 dark:text-lime-500" />
@@ -59,7 +59,7 @@ export default function Navbar({ setShowSidebar, showSidebar }) {
               <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full -top-0 end-6 dark:border-gray-900">
                 20
               </div>
-            </button>
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="px-4 py-2 pr-8">
             <DropdownMenuLabel>Notifications</DropdownMenuLabel>

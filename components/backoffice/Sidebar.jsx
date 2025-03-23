@@ -207,7 +207,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
           height={60}
           className="rounded-full"
         />
-        <p className="ml-4 font-bold text-2xl">Tdmultiven</p>
+        <p className="ml-4 font-bold text-2xl">tdMultiven</p>
       </Link>
       <div className="space-y-3 flex flex-col">
         <Link
@@ -229,13 +229,13 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
               className=""
               onClick={() => setOpenMenu(!openMenu)}
             >
-              <button className="flex items-center space-x-6 py-2">
+              <div className="flex items-center space-x-6 py-2">
                 <div className="flex items-center space-x-3">
                   <Slack />
                   <span>Catalog</span>
                 </div>
                 {openMenu ? <ChevronDown /> : <ChevronRight />}
-              </button>
+              </div>
             </CollapsibleTrigger>
 
             <CollapsibleContent className="py-3 px-3 pl-6 dark:bg-slate-800 rounded-lg dark:text-slate-300">
