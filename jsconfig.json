@@ -2,11 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/app/*": ["app/*"], // Path for app
-      "@/components/*": ["components/*"], // Path for components
-      "@/lib/*": ["lib/*"], // Path for lib
-      "@/redux/*": ["redux/*"], // Explicit path for redux
-      "@/context/*": ["context/*"] // Add path for context folder
+      "@/app/*": ["app/*"], // For app folder
+      "@/components/*": ["components/*"], // For components folder
+      "@/lib/*": ["lib/*"], // For lib folder
+      "@/redux/*": ["redux/*"], // For redux folder
+      "@/context/*": ["context/*"], // For context folder
+      "@/utils/*": ["utils/*"] // If you have a utils folder
     }
   }
 }
