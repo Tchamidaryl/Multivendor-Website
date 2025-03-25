@@ -2,9 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/app/*": ["app/*"], // Explicitly define the path to app
-      "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"]
+      "@/app/*": ["app/*"], // Path for app
+      "@/components/*": ["components/*"], // Path for components
+      "@/lib/*": ["lib/*"], // Path for lib
+      "@/redux/*": ["redux/*"] // Explicit path for redux
     }
   }
 }
