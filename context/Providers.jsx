@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux"
 import { store } from "@/redux/store";
 import { SessionProvider } from "next-auth/react";
-import { ourFileRouter } from "@/app/api/STUFF/core";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
 
 
 export default function Providers({ children }) {
