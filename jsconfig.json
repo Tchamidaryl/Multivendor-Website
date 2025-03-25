@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/app/*": ["app/*"]
+      "@/app/*": ["app/*"], // Explicitly define the path to app
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"]
     }
   }
 }
