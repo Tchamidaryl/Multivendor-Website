@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 export default function Cart() {
   const cartItems = useSelector((store) => store.cart);
+  console.log(cartItems)
   const subTotal =
     cartItems
       .reduce((acc, currentItem) => {

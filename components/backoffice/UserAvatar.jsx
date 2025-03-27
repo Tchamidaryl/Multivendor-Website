@@ -18,6 +18,7 @@ import { generateInitials } from "@/lib/generateInitials";
 export default function UserAvatar({ user = {} }) {
   const { name, image } = user;
   const initials = generateInitials(name);
+  const role = user?.role;
   const router = useRouter();
   async function handleLogout() {
     await signOut();
@@ -26,19 +27,19 @@ export default function UserAvatar({ user = {} }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-          {image ? (
-            <Image
-              src="/profile.png"
-              alt="User profile"
-              width={200}
-              height={200}
-              className="w-8 h-8 rounded-full"
-            />
-          ) : (
-            <div className="w-10 h-10 rounded-full bg-slate-800 shadow-md border border-slate-600 p-4 flex justify-center items-center">
-              <p className="text-slate-50">{initials}</p>
-            </div>
-          )}
+        {image ? (
+          <Image
+            src="/profile.png"
+            alt="User profile"
+            width={200}
+            height={200}
+            className="w-8 h-8 rounded-full"
+          />
+        ) : (
+          <div className="w-10 h-10 rounded-full text-slate-900 dark:text-slate-50 bg-slate-50 dark:bg-slate-800 shadow-md border border-slate-600 p-4 flex justify-center items-center">
+            {initials}
+          </div>
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="px-4 py-2 pr-8">
         <DropdownMenuLabel>{name}</DropdownMenuLabel>
@@ -58,6 +59,17 @@ export default function UserAvatar({ user = {} }) {
             <span>Edit Profile</span>
           </Link>
         </DropdownMenuItem>
+        {role === "USER" && (
+          <DropdownMenuItem>
+            <Link
+              href="/dashboard/orders"
+              className="flex items-center space-x-2"
+            >
+              <Settings className="mr-2 h-4 w-4" />
+              <span>My Orders</span>
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem>
           <button
             onClick={handleLogout}

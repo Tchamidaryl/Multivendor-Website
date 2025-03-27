@@ -4,9 +4,15 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import NavButtons from "../NavButtons";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentStep, updateCheckoutFormData } from "@/redux/slices/checkoutSlice";
+import {
+  setCurrentStep,
+  updateCheckoutFormData,
+} from "@/redux/slices/checkoutSlice";
+import { useSession } from "next-auth/react";
 
 export default function PersonalDetailsForm() {
+  const { data: session, status } = useSession();
+  const userId = session?.user?.id;
   const dispatch = useDispatch();
   const currentStep = useSelector((store) => store.checkout.currentStep);
   const existingFormData = useSelector(
@@ -26,11 +32,14 @@ export default function PersonalDetailsForm() {
   });
 
   async function processData(data) {
-    //Update the checkout data
-    dispatch(updateCheckoutFormData(data));
-    //Update the current step
-    dispatch(setCurrentStep(currentStep + 1));
-    console.log(data);
+    if (userId) {
+      data.userId = userId;
+      //Update the checkout data
+      dispatch(updateCheckoutFormData(data));
+      //Update the current step
+      dispatch(setCurrentStep(currentStep + 1));
+      // console.log(data);
+    }
   }
 
   return (
