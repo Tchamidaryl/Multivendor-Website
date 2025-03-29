@@ -10,9 +10,9 @@ export default function OrderCard({ order }) {
     .reduce((total, item) => total + item.price * item.quantity, 0)
     .toFixed(2);
 
- if (order.orderItems.length === 0) {
-  return null;
- }
+  if (order.orderItems.length === 0) {
+    return null;
+  }
   return (
     <li className="overflow-hidden bg-white dark:bg-slate-900 border border-gray-200 rounded-md">
       <div className="lg:flex">
@@ -29,7 +29,9 @@ export default function OrderCard({ order }) {
               </div>
 
               <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-200">Date</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-200">
+                  Date
+                </p>
                 <p className="text-sm font-bold text-gray-900 mt-0.5 dark:text-slate-50">
                   {orderCreationDate}
                 </p>
@@ -79,7 +81,7 @@ export default function OrderCard({ order }) {
           <ul className="space-y-7">
             {order.orderItems.length > 0
               ? order.orderItems.map((item, i) => {
-                const slug = generateSlug(item.title)
+                  const slug = generateSlug(item.title);
                   return (
                     <li key={i} className="relative flex pb-10 sm:pb-0">
                       <div className="flex-shrink-0">
@@ -151,7 +153,7 @@ export default function OrderCard({ order }) {
             </button>
 
             <Link
-              href="/dashboard/orders/123/invoice"
+              href={`/dashboard/orders/${order.id}/invoice`}
               className="inline-flex items-center justify-center px-4 py-2.5 text-sm font-bold text-gray-900 dark:text-white transition-all duration-200 bg-white dark:bg-slate-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:bg-gray-100"
             >
               View Invoice

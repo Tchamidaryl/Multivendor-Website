@@ -1,23 +1,25 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params }) {
-  const { id } = params
+export async function GET(request) {
   try {
-    const order = await db.order.findUnique({
+    const customers = await db.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
-        userId: id
+        role: "USER",
       },
       include: {
-        orderItems: true
-      }
+        profile: true,
+      },
     });
-    return NextResponse.json(order);
+    return NextResponse.json(customers);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to get order",
+        message: "Failed to get User Profiles",
         error,
       },
       {
@@ -26,4 +28,3 @@ export async function GET(request, { params }) {
     );
   }
 }
-

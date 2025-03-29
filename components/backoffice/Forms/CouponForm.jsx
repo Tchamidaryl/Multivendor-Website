@@ -6,11 +6,14 @@ import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import { convertIsoDateToNormal } from "@/lib/convertIsoDateToNormal";
 import { generateCouponCode } from "@/lib/generateCouponCode";
 import { generateIsoFormattedDate } from "@/lib/generateIsoFormattedDate";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function CouponForm({ updateData = {} }) {
+  const { data: session, status } = useSession();
+  const vendorId = session?.user?.id;
   const expiryDateNormal = convertIsoDateToNormal(updateData.expiryDate);
   const id = updateData?.id ?? "";
   updateData.expiryDate = expiryDateNormal;
@@ -35,6 +38,7 @@ export default function CouponForm({ updateData = {} }) {
   }
 
   async function onSubmit(data) {
+    data.vendorId = vendorId;
     const couponCode = generateCouponCode(data.title, data.expiryDate);
     const isoFormattedDate = generateIsoFormattedDate(data.expiryDate);
     data.expiryDate = isoFormattedDate;

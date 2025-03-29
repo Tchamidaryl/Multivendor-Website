@@ -13,24 +13,29 @@ export default async function Coupons() {
   const id = session?.user?.id;
   console.log(id)
   const role = session?.user?.role;
-  const allCoupons = await getData("coupons");
-  const farmerCoupons = allCoupons.filter((coupon) => coupon.vendorId === id)
+  const allSales = await getData("sales");
+
+  //Fetch all the sales
+  //Filter by vendorId => to get sales for this vendor
+  //Fetch Order by Id
+  //Customer Name, email, phone number, order Number
+  const farmerSales = allSales.filter((sale) => sale.vendorId === id)
   return (
     <div>
       {/* Header */}
-      <PageHeader
+      {/* <PageHeader
         heading="Coupons"
         href="/dashboard/coupons/new"
         linkTitle="Add Coupon"
-      />
+      /> */}
 
       {/* Table Actions */}
       {/* Export // Search // Bulk Delete */}
       <div className="py-0">
         {role === "ADMIN" ? (
-          <DataTable columns={columns} data={allCoupons} />
+          <DataTable columns={columns} data={allSales} />
         ) : (
-          <DataTable columns={columns} data={farmerCoupons} />
+          <DataTable columns={columns} data={farmerSales} />
         )}
       </div>
     </div>

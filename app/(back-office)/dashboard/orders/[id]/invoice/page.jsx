@@ -1,7 +1,11 @@
-import React from 'react'
+import SalesInvoice from "@/components/Order/SalesInvoice";
+import { getData } from "@/lib/getData";
+import React from "react";
 
-export default function page() {
+export default async function page({ params }) {
+  const { id } = await params;
+  const order = await getData(`orders/${id}`)
   return (
-    <div>Invoice Here</div>
-  )
+    <SalesInvoice order={order} />
+  );
 }

@@ -1,7 +1,8 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function GET(request, {params:{id}}) {
+export async function GET(request, { params }) {
+  const { id } = await params;
   try {
     const order = await db.order.findUnique({
       where: {
@@ -9,7 +10,7 @@ export async function GET(request, {params:{id}}) {
       },
       include: {
         orderItems: true,
-      }
+      },
     });
     return NextResponse.json(order);
   } catch (error) {
@@ -26,27 +27,30 @@ export async function GET(request, {params:{id}}) {
   }
 }
 
-export async function DELETE(request, {params:{id}}) {
+export async function DELETE(request, { params }) {
+  const { id } = await params;
   try {
     const existingOrder = await db.order.findUnique({
       where: {
-        id
+        id,
       },
     });
     if (!existingOrder) {
-      return NextResponse.json({
-        data: null,
-        message: "order not found",
-      },
+      return NextResponse.json(
         {
-        status: 404,
-      })
+          data: null,
+          message: "order not found",
+        },
+        {
+          status: 404,
+        }
+      );
     }
     const deletedOrder = await db.order.delete({
-        where: {
-          id,
-        }
-      })
+      where: {
+        id,
+      },
+    });
     return NextResponse.json(deletedOrder);
   } catch (error) {
     console.log(error);

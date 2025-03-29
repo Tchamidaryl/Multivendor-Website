@@ -1,7 +1,8 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function GET(request, {params:{id}}) {
+export async function GET(request, { params }) {
+  const { id } = params
   try {
     const product = await db.product.findUnique({
       where: {
