@@ -54,8 +54,8 @@ export const columns = [
         <ActionColumn
           row={row}
           title="Customer"
-          editEndpoint={`farmers/update/${farmer.id}`}
-          endpoint={`farmers/${farmer.id}`}
+          editEndpoint={`customers/update/${farmer.id}`}
+          endpoint={`customers/${farmer.id}`}
         />
       );
     },

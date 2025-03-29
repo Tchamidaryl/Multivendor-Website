@@ -8,6 +8,14 @@ export async function GET(request, { params }) {
       where: {
         id,
       },
+      select: {
+        email: true,
+        name: true,
+        id: true,
+        role: true,
+        createdAt: true,
+        profile: true,
+      },
     });
     return NextResponse.json(user);
   } catch (error) {

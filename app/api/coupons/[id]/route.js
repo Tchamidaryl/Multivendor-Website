@@ -2,11 +2,11 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  const { id } = params
+  const { id } = params;
   try {
     const coupon = await db.coupon.findUnique({
       where: {
-        id
+        id,
       },
     });
     return NextResponse.json(coupon);
@@ -24,27 +24,30 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function DELETE(request, {params:{id}}) {
+export async function DELETE(request, { params }) {
+  const { id } = params;
   try {
     const existingCoupon = await db.coupon.findUnique({
       where: {
-        id
+        id,
       },
     });
     if (!existingCoupon) {
-      return NextResponse.json({
-        data: null,
-        message: "Coupon not found",
-      },
+      return NextResponse.json(
         {
-        status: 404,
-      })
+          data: null,
+          message: "Coupon not found",
+        },
+        {
+          status: 404,
+        }
+      );
     }
     const deletedCoupon = await db.coupon.delete({
-        where: {
-          id,
-        }
-      })
+      where: {
+        id,
+      },
+    });
     return NextResponse.json(deletedCoupon);
   } catch (error) {
     console.log(error);
@@ -60,7 +63,8 @@ export async function DELETE(request, {params:{id}}) {
   }
 }
 
-export async function PUT(request, { params: { id } }) {
+export async function PUT(request, { params }) {
+  const { id } = params;
   try {
     const { title, couponCode, expiryDate, isActive } = await request.json();
     const existingCoupon = await db.coupon.findUnique({
