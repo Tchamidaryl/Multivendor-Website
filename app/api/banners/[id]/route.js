@@ -6,7 +6,7 @@ export async function GET(request, { params }) {
   try {
     const banner = await db.banner.findUnique({
       where: {
-        id
+        id,
       },
     });
     return NextResponse.json(banner);
@@ -24,27 +24,30 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function DELETE(request, {params:{id}}) {
+export async function DELETE(request, { params }) {
+  const { id } = await params;
   try {
     const existingBanner = await db.banner.findUnique({
       where: {
-        id
+        id,
       },
     });
     if (!existingBanner) {
-      return NextResponse.json({
-        data: null,
-        message: "Banner not found",
-      },
+      return NextResponse.json(
         {
-        status: 404,
-      })
+          data: null,
+          message: "Banner not found",
+        },
+        {
+          status: 404,
+        }
+      );
     }
     const deletedBanner = await db.banner.delete({
-        where: {
-          id,
-        }
-      })
+      where: {
+        id,
+      },
+    });
     return NextResponse.json(deletedBanner);
   } catch (error) {
     console.log(error);
@@ -60,7 +63,8 @@ export async function DELETE(request, {params:{id}}) {
   }
 }
 
-export async function PUT(request, { params: { id } }) {
+export async function PUT(request, { params }) {
+  const { id } = await params;
   try {
     const { title, link, imageUrl, isActive } = await request.json();
     const existingBanner = await db.banner.findUnique({

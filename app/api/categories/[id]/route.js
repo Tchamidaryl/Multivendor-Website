@@ -2,7 +2,7 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  const { id } = params
+  const { id } = await params;
   try {
     const category = await db.category.findUnique({
       where: {
@@ -27,7 +27,8 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function DELETE(request, { params: { id } }) {
+export async function DELETE(request, { params }) {
+  const { id } = await params;
   try {
     const existingCategory = await db.category.findUnique({
       where: {
@@ -65,7 +66,8 @@ export async function DELETE(request, { params: { id } }) {
   }
 }
 
-export async function PUT(request, { params: { id } }) {
+export async function PUT(request, { params }) {
+  const { id } = await params;
   try {
     const { title, slug, imageUrl, description, isActive } =
       await request.json();

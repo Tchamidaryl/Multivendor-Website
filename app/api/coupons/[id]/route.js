@@ -2,7 +2,7 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
   try {
     const coupon = await db.coupon.findUnique({
       where: {
@@ -25,7 +25,7 @@ export async function GET(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
   try {
     const existingCoupon = await db.coupon.findUnique({
       where: {
@@ -64,7 +64,7 @@ export async function DELETE(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
   try {
     const { title, couponCode, expiryDate, isActive } = await request.json();
     const existingCoupon = await db.coupon.findUnique({

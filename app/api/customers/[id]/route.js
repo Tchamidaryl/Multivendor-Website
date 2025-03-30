@@ -2,7 +2,7 @@ import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function PUT(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
   try {
     const {
       name,
@@ -18,7 +18,7 @@ export async function PUT(request, { params }) {
       country,
       district,
     } = await request.json();
-    const existingUser = await db.userProfile.findUnique({
+    const existingUser = await db.user.findUnique({
       where: {
         id,
       },
