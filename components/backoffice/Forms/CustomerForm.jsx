@@ -3,6 +3,7 @@ import ImageInput from "@/components/FormInputs/ImageInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextInput from "@/components/FormInputs/TextInput";
 import { makePutRequest } from "@/lib/apiRequest";
+import { generateIsoFormattedDate } from "@/lib/generateIsoFormattedDate";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -10,7 +11,7 @@ import { useForm } from "react-hook-form";
 export default function CustomerForm({ user, updateData = {} }) {
   const initialImageUrl = updateData?.customerProfileImageUrl ?? "";
   const id = updateData?.id ?? "";
-  console.log(id)
+  console.log(id);
   const [loading, setLoading] = useState(false);
   const [customerProfileImageUrl, setCustomerProfileImageUrl] =
     useState(initialImageUrl);
@@ -33,6 +34,8 @@ export default function CustomerForm({ user, updateData = {} }) {
   async function onSubmit(data) {
     data.userId = id;
     data.customerProfileImageUrl = customerProfileImageUrl;
+    const isoFormattedDate = generateIsoFormattedDate(data.dateOfBirth);
+    data.dateOfBirth = isoFormattedDate;
     console.log(data);
     makePutRequest(
       setLoading,

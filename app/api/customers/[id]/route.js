@@ -51,7 +51,6 @@ export async function PUT(request, { params }) {
         district,
       },
     });
-    // console.log(updatedCoupon);
     return NextResponse.json(updatedUser);
   } catch (error) {
     console.log(error);

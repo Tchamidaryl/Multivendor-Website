@@ -1,5 +1,4 @@
 "use client";
-import FormHeader from "@/components/backoffice/FormHeader";
 import ImageInput from "@/components/FormInputs/ImageInput";
 import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
@@ -13,6 +12,7 @@ import { useForm } from "react-hook-form";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import { generateUserCode } from "@/lib/generateUserCode";
 import { useRouter } from "next/navigation";
+import MultipleImageInput from "../FormInputs/MultipleImageInput";
 
 export default function NewProductForm({
   categories,
@@ -49,11 +49,14 @@ export default function NewProductForm({
     router.push("/dashboard/products");
   }
 
+  const [productImages, setProductImages] = useState([])
+  console.log(productImages)
+
   async function onSubmit(data) {
     const slug = generateSlug(data.title);
     const productCode = generateUserCode("LLP", data.title);
     data.slug = slug;
-    data.imageUrl = imageUrl;
+    data.productImages = productImages;
     data.tags = tags;
     data.qty = 1;
     data.productCode = productCode;
@@ -79,7 +82,7 @@ export default function NewProductForm({
         reset,
         redirect
       );
-      setImageUrl("");
+      setProductImages([]);
       setTags([]);
     }
   }
@@ -186,11 +189,11 @@ export default function NewProductForm({
           </>
         )}
 
-        <ImageInput
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
-          endpoint="productImageUploader"
-          label="Product Image"
+        <MultipleImageInput
+          imageUrls={productImages}
+          setImageUrls={setProductImages}
+          endpoint="multipleProductsUploader"
+          label="Product Images"
         />
 
         {/* TAGS */}

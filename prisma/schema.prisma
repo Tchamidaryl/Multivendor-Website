@@ -75,6 +75,7 @@ model Product {
   title          String
   slug           String   @unique
   imageUrl       String?
+  productImages  String[]
   description    String?
   isActive       Boolean
   isWholesale    Boolean
@@ -190,7 +191,7 @@ model UserProfile {
   firstName     String?
   lastName      String?
   email         String?
-  username      String?
+  userName      String?
   phone         String?
   //Shipping details
   streetAddress String?
@@ -198,11 +199,11 @@ model UserProfile {
   country       String?
   district      String?
 
-  profileImage  String?
+  customerProfileImageUrl  String?
 
   dateOfBirth   DateTime?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Order {
