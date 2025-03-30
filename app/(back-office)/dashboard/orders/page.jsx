@@ -4,6 +4,8 @@ import { getData } from "@/lib/getData";
 import { getServerSession } from "next-auth";
 import React from "react";
 
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 export default async function page() {
   //Fetch orders by userId
   const orders = await getData("orders");
