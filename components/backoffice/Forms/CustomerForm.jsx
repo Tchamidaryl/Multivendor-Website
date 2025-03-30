@@ -2,8 +2,7 @@
 import ImageInput from "@/components/FormInputs/ImageInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextInput from "@/components/FormInputs/TextInput";
-import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
-import { generateUserCode } from "@/lib/generateUserCode";
+import { makePutRequest } from "@/lib/apiRequest";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,6 +10,7 @@ import { useForm } from "react-hook-form";
 export default function CustomerForm({ user, updateData = {} }) {
   const initialImageUrl = updateData?.customerProfileImageUrl ?? "";
   const id = updateData?.id ?? "";
+  console.log(id)
   const [loading, setLoading] = useState(false);
   const [customerProfileImageUrl, setCustomerProfileImageUrl] =
     useState(initialImageUrl);
@@ -31,12 +31,12 @@ export default function CustomerForm({ user, updateData = {} }) {
     router.push("/dashboard/customers");
   }
   async function onSubmit(data) {
-    data.userId = user.id;
+    data.userId = id;
     data.customerProfileImageUrl = customerProfileImageUrl;
     console.log(data);
     makePutRequest(
       setLoading,
-      `api/customers/${user.id}`,
+      `api/customers/${id}`,
       data,
       "Customer Profile",
       reset,
