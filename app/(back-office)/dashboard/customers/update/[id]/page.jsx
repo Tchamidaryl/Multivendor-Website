@@ -1,5 +1,5 @@
 import FormHeader from "@/components/backoffice/FormHeader";
-import CustomerForm from "@/components/backoffice/Form/CustomerForm";
+import CustomerForm from "@/components/backoffice/Forms/CustomerForm";
 import { getData } from "@/lib/getData";
 
 export const dynamic = "force-dynamic"; // Ensure dynamic rendering
