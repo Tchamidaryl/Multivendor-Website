@@ -4,7 +4,11 @@ import Link from "next/link";
 import React from "react";
 
 export default async function SidebarCategories() {
-  const categories = await getData("categories");
+  const categoriesData = await getData("categories");
+
+  //Only categories with Products
+  const categories = categoriesData.filter((category) => category.products.length > 0)
+  // console.log(categories)
 
   return (
     <div className="sm:col-span-3 sm:block hidden bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-700 text-slate-800 overflow-hidden">
@@ -16,7 +20,7 @@ export default async function SidebarCategories() {
           return (
             <Link
               key={i}
-              href="#"
+              href={`/category/${category.slug}`}
               className="flex items-center gap-3 hover:bg-slate-50 duration-300 transition-all dark:text-slate-300 dark:hover:bg-slate-600 rounded-md"
             >
               <Image
