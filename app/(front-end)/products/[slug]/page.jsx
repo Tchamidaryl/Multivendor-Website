@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/frontend/AddToCartButton";
 import BreadCrumb from "@/components/frontend/BreadCrumb";
 import CategoryCarousel from "@/components/frontend/CategoryCarousel";
 import { getData } from "@/lib/getData";
@@ -6,8 +7,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default async function ProductDetailPage({ params: { slug } }) {
+export default async function ProductDetailPage({ params }) {
+  const { slug } = await params;
   const product = await getData(`products/product/${slug}`);
+  const catId = product.categoryId;
+  const category = await getData(`/categories/${catId}`)
+  const categoryProducts = category.products;
   return (
     <div>
       <BreadCrumb />
@@ -52,19 +57,7 @@ export default async function ProductDetailPage({ params: { slug } }) {
             </p>
           </div>
           <div className="flex justify-between items-center py-6">
-            <div className="rounded-xl border border-gray-400 flex gap-3 items-center">
-              <button className="border-r border-gray-400 py-2 px-4">
-                <Minus />
-              </button>
-              <p className="flex-grow py-2 px-4">1</p>
-              <button className="border-l border-gray-400 py-2 px-4">
-                <Plus />
-              </button>
-            </div>
-            <button className="flex items-center space-x-2 bg-lime-600 hover:bg-lime-800 duration-300 transition-all px-4 py-2 rounded-md text-white">
-              <BaggageClaim />
-              <span className="">Add to Cart</span>
-            </button>
+            <AddToCartButton product={product}/>
           </div>
         </div>
         <div className="col-span-3 sm:block hidden bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-700 text-slate-800 overflow-hidden">
@@ -77,11 +70,11 @@ export default async function ProductDetailPage({ params: { slug } }) {
               <span className="">Limi Express</span>
               <Send />
             </div>
-            <div className="py-3 text-slate-100 border-b border-gray-500">
+            <div className="py-3 text-slate-900 dark:text-slate-100 border-b border-gray-500">
               Eligible for Free Delivery.
               <Link href="#">View Details</Link>
             </div>
-            <h2 className="text-slate-200 py-2">Choose your Location</h2>
+            <h2 className="text-slate-900 dark:text-slate-200 py-2">Choose your Location</h2>
 
             <div className="pb-3">
               <select
@@ -123,7 +116,7 @@ export default async function ProductDetailPage({ params: { slug } }) {
         <h2 className="mb-4 text-xl font-semibold text-slate-400 ml-3">
           Similar Products
         </h2>
-        {/* <CategoryCarousel products={category.products} /> */}
+        <CategoryCarousel products={categoryProducts} />
       </div>
     </div>
   );

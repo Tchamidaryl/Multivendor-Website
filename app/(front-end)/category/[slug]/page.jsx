@@ -32,7 +32,6 @@ export default async function page({ params, searchParams }) {
   // console.log(products)
   return (
     <div>
-      <h2>Slug: {slug}</h2>
       <FilterComponent category={category} products={products} />
     </div>
   );
