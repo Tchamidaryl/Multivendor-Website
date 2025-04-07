@@ -79,12 +79,74 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
+  const categoryId = request.nextUrl.searchParams.get("catId");
+  const sortBy = request.nextUrl.searchParams.get("sort");
+  const min = request.nextUrl.searchParams.get("min");
+  const max = request.nextUrl.searchParams.get("max");
+  const searchTerm = request.nextUrl.searchParams.get("search");
+  const page = request.nextUrl.searchParams.get("page") || 1;
+  const pageSize = 3;
+  console.log(sortBy, categoryId);
+  let products;
+  let where = {
+    categoryId,
+  };
+  if (min && max) {
+    where.salePrice = {
+      gte: parseFloat(min),
+      lte: parseFloat(max),
+    };
+  } else if (min) {
+    where.salePrice = {
+      gte: parseFloat(min),
+    };
+  } else if (max) {
+    where.salePrice = {
+      lte: parseFloat(max),
+    };
+  }
+
   try {
-    const products = await db.product.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    if (searchTerm) {
+      products = await db.product.findMany({
+        where: {
+          OR: [
+            {
+              title: { contains: searchTerm, mode: "insensitive" },
+            },
+          ],
+        },
+      });
+    } else if (categoryId && page) {
+      products = await db.product.findMany({
+        where,
+        skip: (parseInt(page) - 1) * parseInt(pageSize),
+        take: parseInt(pageSize),
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+    } else if (categoryId && sortBy) {
+      products = await db.product.findMany({
+        where,
+        orderBy: {
+          salePrice: sortBy === "asc" ? "asc" : "desc",
+        },
+      });
+    } else if (categoryId) {
+      products = await db.product.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        where,
+      });
+    } else {
+      products = await db.product.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+    }
     return NextResponse.json(products);
   } catch (error) {
     console.log(error);

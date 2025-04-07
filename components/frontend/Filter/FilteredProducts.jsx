@@ -1,9 +1,15 @@
-import React from 'react'
-import Product from '../Product';
-import Paginate from './Paginate';
+import React from "react";
+import Product from "../Product";
+import Paginate from "./Paginate";
 
-export default async function FilteredProducts({products=[]}) {
- // const products = await getData("products")
+export default async function FilteredProducts({
+  products = [],
+  productCount,
+}) {
+  // const products = await getData("products")
+  //PAGINATION
+  const pageSize = 3;
+  const totalPages = Math.ceil(productCount / pageSize);
   return (
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -12,7 +18,7 @@ export default async function FilteredProducts({products=[]}) {
         })}
       </div>
       <div className="p-8 mx-auto flex items-center justify-center w-full">
-        <Paginate />
+        <Paginate totalPages={totalPages} />
       </div>
     </div>
   );

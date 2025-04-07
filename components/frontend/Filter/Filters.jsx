@@ -1,11 +1,11 @@
 import PriceFilter from "./PriceFilter";
 import BrandFilter from "./BrandFilter";
 
-export default function Filters() {
+export default function Filters({slug, isSearch}) {
   return (
-    <div className="bg-green-500">
-      <PriceFilter />
-      <BrandFilter />
+    <div className="">
+      <PriceFilter slug={slug} isSearch={isSearch} />
+      {/* <BrandFilter /> */}
     </div>
   );
 }
